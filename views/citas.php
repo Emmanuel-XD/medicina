@@ -72,8 +72,8 @@ $varsesion = $_SESSION['nombre'];
 
 include "../includes/db.php";            
 $result=mysqli_query($conexion,"SELECT ct.id, ct.fecha, ct.hora, ct.estado, ct.fecha_registro, 
-p.nombre, d.name FROM citas ct INNER JOIN pacientes p ON ct.id_paciente = p.id 
-INNER JOIN doctor d ON ct.id_doctor = d.id ");
+p.nombre, d.name, est.estado FROM citas ct INNER JOIN pacientes p ON ct.id_paciente = p.id 
+INNER JOIN doctor d ON ct.id_doctor = d.id LEFT JOIN estado est ON ct.estado = est.id");
 while ($fila = mysqli_fetch_assoc($result)):
     
 ?>
