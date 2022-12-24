@@ -4,7 +4,7 @@ session_start();
 $actualsesion = $_SESSION['nombre'];
 
 if($actualsesion == null || $actualsesion == ''){
-    header("Location: ./_sesion/login.php");
+    header("Location: ../index.php");
 
 
 }
@@ -334,7 +334,7 @@ if($actualsesion == null || $actualsesion == ''){
                                 aria-labelledby="userDropdown">
  
                            
-                                <a class="dropdown-item" href="perfil.php" >
+                                <a class="dropdown-item" href="../views/perfil.php" >
                                     <i class="fas fa-user fa-sm fa-fw mr-2 text-gray-400"></i>
                                     Profile
                                 </a>
@@ -355,7 +355,7 @@ if($actualsesion == null || $actualsesion == ''){
                 <!-- End of Topbar -->
                <?php  //endwhile;?>
                                 
-    <?php include "salir.php";?>
+    <?php include "../views/salir.php";?>
     
 
 

@@ -13,7 +13,7 @@ if (isset($_POST['accion'])) {
             acceso_user();
             break;
 
-            case 'acceso_paciente';
+        case 'acceso_paciente';
             acceso_paciente();
             break;
 
@@ -96,18 +96,13 @@ function acceso_user()
         if ($filas['rol'] == 2) { //doctor
 
             header('Location: ../views/index.php');
-           
-                
-            }
-            if ($filas['rol'] == 3) { //paciente
-
-
-                header('Location: ./_sesion/login.php');
-                session_destroy();
-            
         }
+        if ($filas['rol'] == 3) { //paciente
 
-        
+
+            header('Location: ./_sesion/login.php');
+            session_destroy();
+        }
     } else {
 
 
@@ -133,33 +128,27 @@ function acceso_paciente()
     $resultado = mysqli_query($conexion, $consulta);
     $filas = mysqli_fetch_array($resultado);
 
-  
-    if (isset($filas['rol']) == 1) {
 
-        header('Location: ../index.php');
-        session_destroy();
+    if (isset($filas['rol']) == 3) {
+
+        header('Location: ../home/consulta.php');
+
 
         if ($filas['rol'] == 2) { //doctor
 
             header('Location: ../index.php');
-        session_destroy();
-                
-            }
-            if ($filas['rol'] == 3) { //paciente
-
-
-                header('Location: ./_sesion/consulta.php');
-       
-            
+            session_destroy();
         }
-
-        
+        if ($filas['rol'] == 1) { //paciente
+            header('Location: ../index.php');
+            session_destroy();
+        }
     } else {
 
 
         echo "<script language='JavaScript'>
         alert('Usuario o Contraseña Incorrecta');
-        location.assign('./_sesion/login.php');
+        location.assign('../index.php');
         </script>";
         session_destroy();
     }
@@ -198,12 +187,12 @@ function insertar_cita2()
     if ($resultado) {
         echo "<script language='JavaScript'>
         alert('El registro fue guardado correctamente');
-        location.assign('../views/fondo.php');
+        location.assign('../home/fondo.php');
         </script>";
     } else {
         echo "<script language='JavaScript'>
          alert('Algo salio mal. Intentalo de nuevo');
-         location.assign('./agendar.php');
+         location.assign('../home/agendar.php');
          </script>";
     }
 }
@@ -246,12 +235,12 @@ function insertar_paciente2()
     if ($resultado) {
         echo "<script language='JavaScript'>
         alert('El registro fue guardado correctamente');
-        location.assign('./_sesion/agendar.php');
+        location.assign('../home/agendar.php');
         </script>";
     } else {
         echo "<script language='JavaScript'>
          alert('Algo salio mal. Intentalo de nuevo');
-         location.assign('./_sesion/agendar.php');
+         location.assign('../home/paciente.php');
          </script>";
     }
 }
