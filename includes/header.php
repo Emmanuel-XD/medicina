@@ -83,9 +83,11 @@ if($actualsesion == null || $actualsesion == ''){
                     <div class="bg-white py-2 collapse-inner rounded">
                         <h6 class="collapse-header">Ver Citas:</h6>
                         <a class="collapse-item" href="../views/citas.php">Mostrar</a>
-                    
+                        <a class="collapse-item" href="../views/calendario.php">Calendario</a>
                     </div>
+                    
                 </div>
+                
             </li>
 
             <!-- Nav Item - Utilities Collapse Menu -->

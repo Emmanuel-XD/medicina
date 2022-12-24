@@ -95,7 +95,7 @@ function acceso_user()
 
         if ($filas['rol'] == 2) { //doctor
 
-            header('Location: ../views/index.php');
+            header('Location: ../views/calendario.php');
         }
         if ($filas['rol'] == 3) { //paciente
 
