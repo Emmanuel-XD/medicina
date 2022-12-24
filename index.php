@@ -37,7 +37,7 @@
           Acceso
           </a>
           <ul class="dropdown-menu">
-            <li><a class="dropdown-item" href="#">Administracion</a></li>
+            <li><a class="dropdown-item" href="#" data-toggle="modal" data-target="#user">Administracion</a></li>
             <li><a class="dropdown-item" href="#" data-toggle="modal" data-target="#login">Usuario</a></li>
 
           </ul>
@@ -85,5 +85,6 @@
         
     </body>
 
-    <?php include "./includes/_sesion/account.php";?>
+    <?php include "./home/account.php";?>
+    <?php include "./includes/_sesion/login.php";?>
 </html>
