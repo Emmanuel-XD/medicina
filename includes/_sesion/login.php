@@ -1,66 +1,60 @@
+<?php
 
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-	<meta http-equiv="X-UA-Compatible" content="ie-edge">
-    <title>Login</title>
-   
-    <link rel="stylesheet" type="text/css "href="../../css/style.css">
 
-	<link rel="icon" href="assets/img/logo.png" type="image/x-icon"/>
-	<script src="../../js/fonts.js"></script>
-</head>
-<body>
-   <!--  <img class="wave"src="../assets/img/wave.png" alt="">  -->
-    <div class="contenedor">
-    <div class="img">
-    <img src="../../img/medicos.webp" alt="">
+session_start();
+error_reporting(0);
+$varsesion = $_SESSION['nombre'];
+
+	if($varsesion== null || $varsesion= ''){
+        header("Location: ../../index.php");
+	
+	}
+?>
+<body id="page-top">
+    <div class="modal fade" id="user" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header bg-dark text-white">
+                    <h3 class="modal-title" id="exampleModalLabel">Iniciar Sesion</h3>
+                    <button type="button" class="btn btn-black" data-dismiss="modal">
+					<i class="fa fa-times" aria-hidden="true"></i></button>
+                </div>
+                <div class="modal-body">
+
+             <form  action="./includes/functions.php" method="POST">
+                            <div class="form-group">
+                            <label for="nombre" class="form-label">Nombre *</label>
+                            <input type="text"  id="nombre" name="nombre" class="form-control" required>
+                            </div>
+
+                            <br>
+                          
+                            <div class="form-group">
+                                <label for="password">Contraseña:</label><br>
+                                <input type="password" name="password" id="password" class="form-control" required>
+                            </div>
+
+                            <input type="hidden" name="accion" value="acceso_user">
+                      <br>
+
+                                <div class="mb-3">
+                                    <center>
+                               <input type="submit" value="Acceder" id="register" class="btn btn-primary" 
+                               name="registrar">
+                               <br>
+                               
+                              
+                               </center>
+                               
+                            </div>
+                            </div>
+                            </div>
+
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
     </div>
-    <div class="contenido-login">
-
-
-    <form action="../functions.php" method="POST">
-
-    <img src="../../img/logo.png" alt="">
-    <h2>Sistema Medico</h2>
-    <h1 class="l">INICIAR SESION</h1>
-   
-    <div class="input-div nit">
-    <div class="i">
-    <i class="fas fa-user"></i>
-    </div>
-    <div class="div">
-
-     <input type="text"  name="nombre" id="nombre"  placeholder="USUARIO">
-    </div>
-    </div>
-    <div class="input-div pass">
-    <div class="i">
-    <i class="fas fa-lock"></i>
-    </div>
-    <div class="div">
-
-    <input type="password" name="password" id="password" placeholder="CONTRASEÑA" >
-
-    <input type="hidden" name="accion" value="acceso_user">
-    </div>
-    </div>
-
-   
-   
-    <button class="btn"  type="submit"> Iniciar sesion </button> 
-
     </form>
     
-
-    </div>
-    </div>
-
-    <!-- Js personalizado -->
-    
-	
-</body>
-
-</html>
