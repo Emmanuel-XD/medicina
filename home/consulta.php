@@ -1,14 +1,12 @@
-<?php include "../includes/header.php";?>
-<?php include "../includes/db.php";?>
+<?php include "../includes/header.php"; ?>
+<?php include "../includes/db.php"; ?>
 
 <?php
 error_reporting(0);
 session_start();
 $actualsesion = $_SESSION['nombre'];
 
-if($actualsesion == null || $actualsesion == ''){
-
-
+if ($actualsesion == null || $actualsesion == '') {
 }
 ?>
 
@@ -17,72 +15,54 @@ if($actualsesion == null || $actualsesion == ''){
 
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Estado de cita</title>
+    <script src="../js/cont/jquery.min.js"></script>
+
 </head>
+
 <body>
-<div class="container">
-<h1 class="text-center">Tu informacion <?php echo $_SESSION['nombre']; ?></h1>
+    <div class="container">
+        <h1 class="text-center">Consulta tu Informacion <?php echo $_SESSION['nombre']; ?></h1>
 
-<div class="col-sm-12">
-<div class="table-responsive">
+        <br>
+        <p>Acontinuacion puedes consultar el estado de tu cita. Asi como tambien podras ver algunos cambios
+            realizados dentro del sistema en caso de algun cambio. </p>
 
+        <div class="col-sm-12">
+            <div class="mb-3">
+                <label for="form-label">Buscar</label>
+                <input type="text" class="form-control" id="buscar" name="buscar" placeholder="Escribe tu nombre de paciente" required>
 
-<table class="table table-striped table-hover">
-<thead>
-
-<tr>
-<th>Nombre</th>
-<th>Usuario</th>
-<th>Rol</th>
-<th>registro</th>
-
-
-</tr>
-
-</thead>
-
-<tbody>
-
-<?php
-
-$sql = "SELECT u.correo, p.nombre, ct.fecha, d.name FROM user u LEFT JOIN pacientes P ON u.id = p.id_user
-LEFT JOIN citas ct ON ct.id_paciente = p.id LEFT JOIN doctor d ON ct.id_doctor = d.id   WHERE nombre ='$actualsesion'";
-$usuarios = mysqli_query($conexion, $sql);
-if($usuarios -> num_rows > 0){
-foreach($usuarios as $key => $fila ){
+            </div>
+            <button onclick="buscar_ahora($('#buscar').val());" class="btn btn-primary">Consultar</button>
 
 
-
-
-?>
-
-<tr>
-<td><?php echo $fila['nombre']; ?></td>
-<td><?php echo $fila['fecha']; ?></td>
-<td><?php echo $fila['rol']; ?></td>
-<td><?php echo $fila['fecha']; ?></td>
-</tr>
-
-
-<?php
-}
-}else{
-
-    ?>
-    <tr class="text-center">
-    <td colspan="4">No existe registros</td>
-    </tr>
-
-    <?php
-}?>
-</tbody>
-
-</table>
-</div>
+                    <div id="datos" ></div>
+   
+        </div>
 </body>
-<?php include "../includes/footer.php";?>
+
+<script>
+    function buscar_ahora(buscar) {
+        var parametros = {
+            "buscar": buscar
+        };
+        $.ajax({
+            data: parametros,
+            type: 'POST',
+            url: 'buscador.php',
+            success: function(data) {
+                document.getElementById("datos").innerHTML = data;
+            }
+        });
+    }
+</script>
+
+<?php include "../includes/footer.php"; ?>
+
 </html>
