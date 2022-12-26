@@ -1,5 +1,5 @@
 <?php include "../includes/header.php"; ?>
-<?php require_once('../includes/database.php') ?>
+<?php require_once('../includes/db.php') ?>
 <!DOCTYPE html>
 <html lang="es">
 
