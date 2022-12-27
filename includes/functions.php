@@ -50,6 +50,10 @@ if (isset($_POST['accion'])) {
             editar_user();
             break;
 
+        case 'editar_perfil':
+            editar_perfil();
+            break;
+
         case 'editar_paciente':
             editar_paciente();
             break;
@@ -329,6 +333,17 @@ function editar_user()
          location.assign('../views/usuarios.php');
          </script>";
     }
+}
+
+
+function editar_perfil()
+{
+    include "db.php";
+    extract($_POST);
+    $consulta = "UPDATE user SET nombre = '$nombre', correo = '$correo',
+     rol ='$rol' WHERE id = '$id' ";
+    $resultado = mysqli_query($conexion, $consulta);
+    echo "$resultado";
 }
 
 function editar_paciente()
