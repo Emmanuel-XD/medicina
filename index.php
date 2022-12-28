@@ -10,8 +10,9 @@
         <!-- Core theme CSS (includes Bootstrap)-->
         <link href="./css/estilo.css" rel="stylesheet" />
 
-
+        
   <script src="./js/cont/jquery.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-validate/1.19.5/jquery.validate.min.js"></script>
   <script src="./js/cont/bootstrap.min.js"></script>
   <style>
     a{
@@ -37,8 +38,8 @@
           Acceso
           </a>
           <ul class="dropdown-menu">
-            <li><a class="dropdown-item" href="#" data-toggle="modal" data-target="#user">Administracion</a></li>
-            <li><a class="dropdown-item" href="#" data-toggle="modal" data-target="#login">Usuario</a></li>
+            <li><a class="dropdown-item"  data-toggle="modal" data-target="#user">Administracion</a></li>
+            <li><a class="dropdown-item"  data-toggle="modal" data-target="#login">Usuario</a></li>
 
           </ul>
         </li>
@@ -84,7 +85,7 @@
 
         
     </body>
-
     <?php include "./home/account.php";?>
     <?php include "./includes/_sesion/login.php";?>
+    <script src="./js/logins.js"></script>
 </html>

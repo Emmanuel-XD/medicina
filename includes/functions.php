@@ -91,31 +91,27 @@ function acceso_user()
     $consulta = "SELECT*FROM user where nombre='$nombre' and password='$password'";
     $resultado = mysqli_query($conexion, $consulta);
     $filas = mysqli_fetch_array($resultado);
+    if($filas['rol'])
+    {
+         if ($filas['rol'] == 1) {
+            $_SESSION['rol'] = $filas['rol'];
+            echo json_encode("login_success");
 
-    if (isset($filas['rol']) == 1) {
-
-        header('Location: ../views/usuarios.php');
-
-
+        }
         if ($filas['rol'] == 2) { //doctor
-
-            header('Location: ../views/calendario.php');
+            $_SESSION['rol'] = $filas['rol'];
+            echo json_encode("login_success");
         }
         if ($filas['rol'] == 3) { //paciente
-
-
-            header('Location: ./_sesion/login.php');
+            echo json_encode("userType_error");
             session_destroy();
         }
-    } else {
-
-
-        echo "<script language='JavaScript'>
-        alert('Usuario o Contraseña Incorrecta');
-        location.assign('./_sesion/login.php');
-        </script>";
-        session_destroy();
     }
+        else {
+
+            echo json_encode("session_error");
+            session_destroy();
+        }
 }
 
 function acceso_paciente()
@@ -132,28 +128,24 @@ function acceso_paciente()
     $resultado = mysqli_query($conexion, $consulta);
     $filas = mysqli_fetch_array($resultado);
 
+    if($filas['rol']){
+        if ($filas['rol'] == 3) {
+        $_SESSION['rol'] = $filas['rol'];
+        echo json_encode("login_success");
 
-    if (isset($filas['rol']) == 3) {
-
-        header('Location: ../home/consulta.php');
-
-
+         }
         if ($filas['rol'] == 2) { //doctor
 
-            header('Location: ../index.php');
+            echo json_encode("userType_error");
             session_destroy();
         }
         if ($filas['rol'] == 1) { //paciente
-            header('Location: ../index.php');
+            echo json_encode("userType_error");
             session_destroy();
         }
-    } else {
-
-
-        echo "<script language='JavaScript'>
-        alert('Usuario o Contraseña Incorrecta');
-        location.assign('../index.php');
-        </script>";
+    }
+     else {
+        echo json_encode("session_error");
         session_destroy();
     }
 }

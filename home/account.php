@@ -9,18 +9,20 @@
 					<i class="fa fa-times" aria-hidden="true"></i></button>
                 </div>
                 <div class="modal-body">
-
-             <form  action="./includes/functions.php" method="POST">
+                <!-- action="./includes/functions.php" method="POST" -->
+             <form id="formUser">
+                <div class="alerts">
+                </div>
                             <div class="form-group">
                             <label for="nombre" class="form-label">Nombre *</label>
-                            <input type="text"  id="nombre" name="nombre" class="form-control" required>
+                            <input type="text"  id="nombreUser" name="nombre" class="form-control" required>
                             </div>
 
                             <br>
                           
                             <div class="form-group">
                                 <label for="password">Contraseña:</label><br>
-                                <input type="password" name="password" id="password" class="form-control" required>
+                                <input type="password" name="password" id="passwordUser" class="form-control" required>
                             </div>
 
                             <input type="hidden" name="accion" value="acceso_paciente">
@@ -28,8 +30,8 @@
 
                                 <div class="mb-3">
                                     <center>
-                               <input type="submit" value="Acceder" id="register" class="btn btn-primary" 
-                               name="registrar">
+                               <input type="button" value="Acceder" id="loginUser" class="buttonLgn btn btn-primary" 
+                               name="Login usuario">
                                <br>
                                <br>
                                <a href="./home/create.php" > ¿Aun no tienes cuenta? Registrate</a> 
@@ -41,11 +43,10 @@
                             </div>
                             </div>
 
-                        </form>
+                                </form>
+                            </div>
+                        </div>
                     </div>
                 </div>
-            </div>
-        </div>
-    </div>
-    </form>
+                </div>
     

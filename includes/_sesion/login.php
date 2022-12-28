@@ -21,25 +21,25 @@ $varsesion = $_SESSION['nombre'];
                 </div>
                 <div class="modal-body">
 
-             <form  action="./includes/functions.php" method="POST">
+             <form id="formAdmin">
+             <div id="alerts">
+                </div>
                             <div class="form-group">
                             <label for="nombre" class="form-label">Nombre *</label>
-                            <input type="text"  id="nombre" name="nombre" class="form-control" required>
+                            <input type="text"  name="nombre" id="nombreAdmin" class="nombre form-control" required>
                             </div>
 
                             <br>
                           
                             <div class="form-group">
                                 <label for="password">Contraseña:</label><br>
-                                <input type="password" name="password" id="password" class="form-control" required>
+                                <input type="password" name="password" id="passwordAdmin"  class="password form-control" required>
                             </div>
-
-                            <input type="hidden" name="accion" value="acceso_user">
                       <br>
 
                                 <div class="mb-3">
                                     <center>
-                               <input type="submit" value="Acceder" id="register" class="btn btn-primary" 
+                               <input type="button" value="Acceder" id="loginAdmin" class=" btn btn-primary" 
                                name="registrar">
                                <br>
                                

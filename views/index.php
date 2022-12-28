@@ -3,11 +3,11 @@
 session_start();
 error_reporting(0);
 $varsesion = $_SESSION['nombre'];
+$typeUser = $_SESSION['nombre'];
+	if($varsesion== null || $varsesion= '' && $typeUser == null || $typeUser == ''){
+        ?>
 
-	if($varsesion== null || $varsesion= ''){
-
-	    header("Location: ../includes/_sesion/login.php");
-	die();
+        <?php
 	} 
 
 

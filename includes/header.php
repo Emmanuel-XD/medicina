@@ -4,9 +4,15 @@ session_start();
 $actualsesion = $_SESSION['nombre'];
 
 if($actualsesion == null || $actualsesion == ''){
-    header("Location: ../index.php");
+/*     header("Location: ../index.php");
 
-
+ */
+?>
+<script src="https://code.jquery.com/jquery-3.6.3.min.js"></script>
+<script src="../js/not-allowed.js"></script>
+<script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
+<?php
+die();
 }
 ?>
 
