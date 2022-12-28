@@ -1,3 +1,14 @@
+
+<?php
+session_start();
+error_reporting(0);
+	$varsesion = $_SESSION['nombre'];
+    $typeUser = $_SESSION['nombre'];
+	if($varsesion== null || $varsesion= '' && $typeUser == null || $typeUser == ''){
+
+   
+
+?>
 <!DOCTYPE html>
 <html lang="en">
     <head>
@@ -89,3 +100,10 @@
     <?php include "./includes/_sesion/login.php";?>
     <script src="./js/logins.js"></script>
 </html>
+<?php  }
+
+
+else{
+    header("Location: views/index.php");
+}
+?>

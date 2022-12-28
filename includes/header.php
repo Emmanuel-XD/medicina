@@ -3,7 +3,7 @@ error_reporting(0);
 session_start();
 $actualsesion = $_SESSION['nombre'];
 
-if($actualsesion == null || $actualsesion == ''){
+if($actualsesion == null || $actualsesion == ''  && $typeUser == null || $typeUser == '' ){
 /*     header("Location: ../index.php");
 
  */
