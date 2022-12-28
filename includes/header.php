@@ -2,11 +2,8 @@
 error_reporting(0);
 session_start();
 $actualsesion = $_SESSION['nombre'];
-
+$typeUser = $_SESSION['rol'];
 if($actualsesion == null || $actualsesion == ''  && $typeUser == null || $typeUser == '' ){
-/*     header("Location: ../index.php");
-
- */
 ?>
 <script src="https://code.jquery.com/jquery-3.6.3.min.js"></script>
 <script src="../js/not-allowed.js"></script>

@@ -22,7 +22,7 @@ $varsesion = $_SESSION['nombre'];
                 <div class="modal-body">
 
              <form id="formAdmin">
-             <div id="alerts">
+             <div class="alerts">
                 </div>
                             <div class="form-group">
                             <label for="nombre" class="form-label">Nombre *</label>
