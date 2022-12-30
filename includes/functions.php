@@ -332,10 +332,14 @@ function editar_perfil()
 {
     include "db.php";
     extract($_POST);
-    $consulta = "UPDATE user SET nombre = '$nombre', correo = '$correo',
-     rol ='$rol' WHERE id = '$id' ";
+    $consulta = "UPDATE user SET nombre = '$nombre', correo = '$correo' WHERE id = '$id' ";
     $resultado = mysqli_query($conexion, $consulta);
-    echo "$resultado";
+    if($resultado === true){
+        echo json_encode("updated");
+    }
+    if($resultado === false){
+        echo json_encode("error");
+    }
 }
 
 function editar_paciente()

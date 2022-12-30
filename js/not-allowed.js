@@ -2,10 +2,7 @@ var
     closeInSeconds = 5,
     displayText = "Redireccionando a la pagina principal...",
     timer;
-console.log("text")
 
-
- 
 
 $(document).ready(function () {
     swal({

@@ -47,7 +47,6 @@ if ($usuarios->num_rows > 0) {
                 <nav>
                     <ol class="breadcrumb">
                         <li class="breadcrumb-item"><a href="index.php">Home</a></li>
-                        <li class="breadcrumb-item">Users</li>
                         <li class="breadcrumb-item active">Profile</li>
                     </ol>
                 </nav>
@@ -129,13 +128,13 @@ if ($usuarios->num_rows > 0) {
 
                                         <!-- Profile Edit Form -->
 
-                                        <form action="../includes/functions.php" id="form" method="POST">
+                                        <form id="form">
 
 
                                             <div class="row mb-3">
                                                 <label for="fullName" class="col-md-4 col-lg-3 col-form-label">Nombre</label>
                                                 <div class="col-md-8 col-lg-9">
-                                                    <input name="nombre" type="text" class="form-control" id="nombre" value="<?php echo $fila['nombre']; ?>">
+                                                    <input name="nombre" type="text" data-id="<?php echo $fila['id']; ?>" class="form-control" id="nombre" value="<?php echo $fila['nombre']; ?>">
                                                 </div>
                                             </div>
 
@@ -150,16 +149,11 @@ if ($usuarios->num_rows > 0) {
                                             <div class="row mb-3">
                                                 <label for="Job" class="col-md-4 col-lg-3 col-form-label">Tipó de Usuario</label>
                                                 <div class="col-md-8 col-lg-9">
-                                                    <input name="rol" type="text" class="form-control" id="rol" readonly value="<?php echo $fila['rol']; ?>">
+                                                    <input name="rol" type="text"  class="form-control" id="rol" readonly value="<?php echo $fila['rol']; ?>">
                                                 </div>
                                             </div>
-
-                                            <input type="hidden" name="accion" value="editar_perfil">
-                                            <input type="hidden" name="id" value="<?php echo $id; ?>">
-
-
                                             <div class="text-center">
-                                                <button type="submit" class="btn btn-primary">Guardar Cambios</button>
+                                                <button type="button" id="submitedit" class="btn btn-primary">Guardar Cambios</button>
                                             </div>
                                         </form><!-- End Profile Edit Form -->
 
@@ -170,6 +164,8 @@ if ($usuarios->num_rows > 0) {
 
 </body>
 <script src="../js/bootstrap.bundle.min.js"></script>
+<script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
+<script src="../js/edit.js"></script>
 
 </html>
 
