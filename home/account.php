@@ -30,7 +30,7 @@
 
                                 <div class="mb-3">
                                     <center>
-                               <input type="button" value="Acceder" id="loginUser" class="buttonLgn btn btn-primary" 
+                               <input type="button" value="Acceder" id="loginUser" class="buttonLgn btn bg-success text-white" 
                                name="Login usuario">
                                <br>
                                <br>
