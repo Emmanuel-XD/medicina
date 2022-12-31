@@ -39,7 +39,7 @@ if ($varsesion == null || $varsesion = '') {
 
                         <div class="mb-3">
                             <center>
-                                <input type="button" value="Acceder" id="loginAdmin" class=" btn btn-primary" name="registrar">
+                                <input type="button" value="Acceder" id="loginAdmin" class=" btn bg-success text-white" name="registrar">
                                 <br>
 
 
