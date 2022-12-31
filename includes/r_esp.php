@@ -29,7 +29,7 @@ while ($fila = mysqli_fetch_assoc($result)):
     
 ?>
 <tr>
-<td><?php echo $fila['nombre']; ?></td>
+<td><?php echo $fila['especialidad']; ?></td>
 
 <td><?php echo $fila['fecha']; ?></td>
 <td>

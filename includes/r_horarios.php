@@ -25,13 +25,14 @@ header("Content-Disposition: attachment; filename=horarios.xls");
                         <tbody>
                         <?php
 include "db.php";             
-$result=mysqli_query($conexion,"SELECT * FROM horario ");
+$result=mysqli_query($conexion,"SELECT h.id, h.dias, h.id_doctor, h.fecha, d.name  FROM horario h 
+INNER JOIN doctor d ON h.id_doctor = d.id");
 while ($fila = mysqli_fetch_assoc($result)):
     
 ?>
 <tr>
 <td><?php echo $fila['dias']; ?></td>
-<td><?php echo $fila['nombre']; ?></td>
+<td><?php echo $fila['name']; ?></td>
 <td><?php echo $fila['fecha']; ?></td>
 <td>
  

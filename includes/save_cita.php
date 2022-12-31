@@ -1,5 +1,5 @@
 <?php 
-require_once('database.php');
+require_once('db.php');
 if($_SERVER['REQUEST_METHOD'] !='POST'){
     echo "<script> alert('Error: No hay datos para guardar.'); location.replace('../views/calendario.php') </script>";
     $conexion->close();

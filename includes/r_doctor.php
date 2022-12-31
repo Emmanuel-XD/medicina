@@ -16,7 +16,7 @@ header("Content-Disposition: attachment; filename=doctores.xls");
                    <thead>    
                          <tr>
                     
-                        <th>Folio#</th>
+                        <th>Cedula</th>
                         <th>Nombre</th>
                         <th>Especialid</th>
                         <th>Sexo</th>
@@ -30,13 +30,15 @@ header("Content-Disposition: attachment; filename=doctores.xls");
                         <tbody>
                         <?php
 include "db.php";             
-$result=mysqli_query($conexion,"SELECT * FROM doctor ");
+$result=mysqli_query($conexion,"SELECT d.id, d.cedula, d.name, d.apellidos,d.correo, d.sexo, d.telefono, 
+d.direccion, d.fecha, d.fecha_registro, esp.especialidad, h.dias FROM doctor d LEFT JOIN especialidades esp 
+ON d.id_especialidad = esp.id LEFT JOIN horario h ON d.id_horario = h.id ");
 while ($fila = mysqli_fetch_assoc($result)):
     
 ?>
 <tr>
 <td><?php echo $fila['cedula']; ?></td>
-<td><?php echo $fila['nombre']; ?></td>
+<td><?php echo $fila['name']; ?></td>
 <td><?php echo $fila['especialidad']; ?></td>
 <td><?php echo $fila['sexo']; ?></td>
 <td><?php echo $fila['telefono']; ?></td>

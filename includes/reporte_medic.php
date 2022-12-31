@@ -30,7 +30,7 @@ function Header()
     $this->Ln(30);
     $this->SetFont('Arial','B',10);
     $this->SetX(5);
-    $this->Cell(20,10,'Folio#',1,0,'C',0);
+    $this->Cell(20,10,'Cedula',1,0,'C',0);
     $this->Cell(30,10,'Doctor',1,0,'C',0);
     $this->Cell(35,10,'Especialidades',1,0,'C',0,);
     $this->Cell(20,10,'Sexo',1,0,'C',0);
@@ -61,7 +61,9 @@ function Footer()
 }
 
 include "db.php";  
-$consulta = "SELECT * FROM doctor";
+$consulta = "SELECT d.id, d.cedula, d.name, d.apellidos,d.correo, d.sexo, d.telefono, 
+d.direccion, d.fecha, d.fecha_registro, esp.especialidad, h.dias FROM doctor d LEFT JOIN especialidades esp 
+ON d.id_especialidad = esp.id LEFT JOIN horario h ON d.id_horario = h.id";
 $resultado = mysqli_query($conexion, $consulta);
 
 $pdf = new PDF();
@@ -75,7 +77,7 @@ while ($row=$resultado->fetch_assoc()) {
     $pdf->SetX(5);
 
     $pdf->Cell(20,10,$row['cedula'],1,0,'C',0);
-    $pdf->Cell(30,10,$row['nombre'],1,0,'C',0);
+    $pdf->Cell(30,10,$row['name'],1,0,'C',0);
     $pdf->Cell(35,10,$row['especialidad'],1,0,'C',0);
     $pdf->Cell(20,10, $row['sexo'],1,0,'C',0);
     $pdf->Cell(27,10, $row['telefono'],1,0,'C',0);
@@ -89,4 +91,3 @@ while ($row=$resultado->fetch_assoc()) {
 
 
 	$pdf->Output();
-?>

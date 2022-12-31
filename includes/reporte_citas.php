@@ -29,12 +29,11 @@ function Header()
    
     $this->Ln(30);
     $this->SetFont('Arial','B',10);
-    $this->SetX(8);
+    $this->SetX(18);
     $this->Cell(25,10,'Fecha_Cita',1,0,'C',0);
     $this->Cell(20,10,'Horario',1,0,'C',0);
     $this->Cell(35,10,'Paciente',1,0,'C',0);
     $this->Cell(35,10,'Doctor',1,0,'C',0);
-    $this->Cell(25,10,'Especialidad',1,0,'C',0);
     $this->Cell(20,10,'Estado',1,0,'C',0,);
     $this->Cell(35,10,'Registro',1,1,'C',0);
 
@@ -61,7 +60,9 @@ function Footer()
 }
 
 include "db.php";  
-$consulta = "SELECT * FROM citas";
+$consulta = "SELECT ct.id, ct.fecha, ct.hora, ct.estado, ct.fecha_registro, 
+p.nombre, d.name, est.estado FROM citas ct INNER JOIN pacientes p ON ct.id_paciente = p.id 
+INNER JOIN doctor d ON ct.id_doctor = d.id LEFT JOIN estado est ON ct.estado = est.id";
 $resultado = mysqli_query($conexion, $consulta);
 
 $pdf = new PDF();
@@ -72,13 +73,12 @@ $pdf->SetFont('Arial','',10);
 //$pdf->SetWidths(array(10, 30, 27, 27, 20, 20, 20, 20, 22));
 while ($row=$resultado->fetch_assoc()) {
 
-    $pdf->SetX(8);
+    $pdf->SetX(18);
 
     $pdf->Cell(25,10,$row['fecha'],1,0,'C',0);
     $pdf->Cell(20,10,$row['hora'],1,0,'C',0);
-    $pdf->Cell(35,10, $row['paciente'],1,0,'C',0);
-    $pdf->Cell(35,10,$row['doctor'],1,0,'C',0);
-    $pdf->Cell(25,10, $row['especialidad'],1,0,'C',0);
+    $pdf->Cell(35,10, $row['nombre'],1,0,'C',0);
+    $pdf->Cell(35,10,$row['name'],1,0,'C',0);
     $pdf->Cell(20,10, $row['estado'],1,0,'C',0);
     $pdf->Cell(35,10, $row['fecha_registro'],1,1,'C',0);
 

@@ -56,7 +56,8 @@ function Footer()
 }
 
 include "db.php";  
-$consulta = "SELECT * FROM horario";
+$consulta = "SELECT h.id, h.dias, h.id_doctor, h.fecha, d.name  FROM horario h 
+INNER JOIN doctor d ON h.id_doctor = d.id";
 $resultado = mysqli_query($conexion, $consulta);
 
 $pdf = new PDF();
@@ -70,7 +71,7 @@ while ($row=$resultado->fetch_assoc()) {
     $pdf->SetX(25);
 
     $pdf->Cell(70,10,$row['dias'],1,0,'C',0);
-    $pdf->Cell(45,10,$row['nombre'],1,0,'C',0);
+    $pdf->Cell(45,10,$row['name'],1,0,'C',0);
     $pdf->Cell(45,10,$row['fecha'],1,1,'C',0);
 	
 
