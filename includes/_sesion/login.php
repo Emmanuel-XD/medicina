@@ -16,7 +16,7 @@ if ($varsesion == null || $varsesion = '') {
             <div class="modal-content">
                 <div class="modal-header bg-success text-white">
                     <h3 class="modal-title" id="exampleModalLabel">Iniciar Sesion</h3>
-                    <button type="button" class="btn btn-success" data-dismiss="modal">
+                    <button type="button" class="btn bg-success" data-dismiss="modal">
                         <i class="fa fa-times" aria-hidden="true"></i></button>
                 </div>
                 <div class="modal-body">
