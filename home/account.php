@@ -3,9 +3,9 @@
     <div class="modal fade" id="login" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
         <div class="modal-dialog" role="document">
             <div class="modal-content">
-                <div class="modal-header bg-dark text-white">
+                <div class="modal-header bg-success text-white">
                     <h3 class="modal-title" id="exampleModalLabel">Iniciar Sesion</h3>
-                    <button type="button" class="btn btn-black" data-dismiss="modal">
+                    <button type="button" class="btn btn-success" data-dismiss="modal">
 					<i class="fa fa-times" aria-hidden="true"></i></button>
                 </div>
                 <div class="modal-body">
