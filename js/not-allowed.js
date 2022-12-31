@@ -1,12 +1,17 @@
 var
     closeInSeconds = 5,
     displayText = "Redireccionando a la pagina principal...",
+    title = "Debes iniciar sesion primero para acceder",
+    url = "../index.php",
     timer;
-
+   
 
 $(document).ready(function () {
+    if(document.getElementById('notAllow')){
+        title = "No tienes permisos para acceder aqui"
+    }
     swal({
-        title: "Debes iniciar sesion primero para acceder",   
+        title: title,   
         text: displayText.replace(/#1/, closeInSeconds),   
         timer: closeInSeconds * 1000,   
         button: false,
@@ -29,7 +34,6 @@ timer = setInterval(function() {
 
 });
 setTimeout(function(){
-    url = "../index.php";
     $(location).attr('href',url);
     },3000);
 

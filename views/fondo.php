@@ -1,9 +1,16 @@
 <?php
 session_start();
 error_reporting(0);
+if($_SESSION['nombre']){
 
   ?>
-
+  <div id="notAllow" ></div>
+<script src="https://code.jquery.com/jquery-3.6.3.min.js"></script>
+<script  src="../js/not-allowed.js"></script>
+<script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
+<?php 
+die();
+}?>
 <!DOCTYPE html>
 <html lang="en">
 <head>

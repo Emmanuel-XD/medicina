@@ -19,8 +19,6 @@ $("#submitedit").click(function (e) {
 function confirmation(r) {
     if(r){
         if(r === "updated"){{
-            console.log("test")
-            
             new swal({
                 title: "cambios realzado correctamente",   
                 text: "Por favor inicia sesion nuevamente... cerrando sesión...",   
@@ -32,7 +30,7 @@ function confirmation(r) {
             setTimeout(function(){
                 url = "../includes/_sesion/cerrarSesion.php";
                 $(location).attr('href',url);
-                },3000);
+                },5000);
         }}
     }
     

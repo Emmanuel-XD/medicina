@@ -33,21 +33,23 @@ if ($actualsesion == null || $actualsesion == '') {
         <p>Acontinuacion puedes consultar el estado de tu cita. Asi como tambien podras ver algunos cambios
             realizados dentro del sistema en caso de algun cambio. </p>
 
-        <div class="col-sm-12">
+<!--         <div class="col-sm-12">
             <div class="mb-3">
                 <label for="form-label">Buscar</label>
                 <input type="text" class="form-control" id="buscar" name="buscar" placeholder="Escribe tu nombre de paciente" required>
 
             </div>
             <button onclick="buscar_ahora($('#buscar').val());" class="btn btn-primary">Consultar</button>
+ -->
 
-
-                    <div id="datos" ></div>
+                    <div data-id="<?php echo $_SESSION['nombre']?>" id="datos" ></div>
    
         </div>
 </body>
 
 <script>
+    var buscar = $("#datos").data("id");
+    $(document).onload(buscar_ahora(buscar))
     function buscar_ahora(buscar) {
         var parametros = {
             "buscar": buscar

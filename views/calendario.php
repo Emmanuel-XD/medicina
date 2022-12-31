@@ -1,4 +1,19 @@
+<?php
+session_start();
+$typeUser = $_SESSION['rol'];
+if($typeUser === '2' || $typeUser ==='1'){
+ 
+    error_reporting(0);
+    $varsesion = $_SESSION['nombre'];
+    
+    if ($varsesion == null || $varsesion = '') {
+    
+        header("Location: ../includes/_sesion/login.php");
+        die();
+    }
+?>
 <?php include "../includes/header.php"; ?>
+
 <?php require_once('../includes/db.php') ?>
 <!DOCTYPE html>
 <html lang="es">
@@ -170,3 +185,11 @@ if(isset($conexion)) $conexion->close();
 </body>
 
 </html>
+<?php }
+else {
+?>
+<!-- <div id="notAllow" ></div>
+<script src="https://code.jquery.com/jquery-3.6.3.min.js"></script>
+<script  src="../js/not-allowed.js"></script>
+<script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script> --><?php
+}?>

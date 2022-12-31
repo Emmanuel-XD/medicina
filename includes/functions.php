@@ -131,6 +131,7 @@ function acceso_paciente()
     if($filas['rol']){
         if ($filas['rol'] == 3) {
         $_SESSION['rol'] = $filas['rol'];
+        $_SESSION['id'] = $filas['id'];
         echo json_encode("login_success");
 
          }

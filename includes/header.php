@@ -43,7 +43,7 @@ die();
 </head>
 
 <body id="page-top">
-
+    <?php if($typeUser === '2' || $typeUser ==='1'){?>
     <!-- Page Wrapper -->
     <div id="wrapper">
 
@@ -133,8 +133,6 @@ die();
                 </div>
             </li>
 
-            
-
             <!-- Nav Item - Charts -->
             <li class="nav-item">
                 <a class="nav-link" href="../views/especialidades.php">
@@ -149,8 +147,6 @@ die();
                     <span>Horarios</span></a>
             </li>
 
-            <?php //if( $actualsesion == "Administrador"){?>
-                
             <!-- Nav Item - user -->
             <li class="nav-item">
 
@@ -158,12 +154,6 @@ die();
                 <i class="fa fa-user" aria-hidden="true"></i>
                     <span>Usuarios</span></a>
             </li>
-
-            <?php
- //};
-
-   ?> 
-
             <!-- Nav Item - infor -->
             <li class="nav-item">
                 <a class="nav-link" href="../views/acerca.php">
@@ -186,7 +176,7 @@ die();
 
         </ul>
         <!-- End of Sidebar -->
-
+<?php };?>
         <!-- Content Wrapper -->
         <div id="content-wrapper" class="d-flex flex-column">
 
@@ -323,17 +313,6 @@ die();
                                 <img class="img-profile rounded-circle"
                                     src="../img/undraw_profile.svg">
                             </a>
-                            <?php 
-                                //Con esto editamos el perfil de usuario en sesion
-                                //include "db.php";              
-                                //$result=mysqli_query($conexion,"SELECT  user.id, user.nombre, user.correo, user.password, user.fecha,
-                                //roles.rol FROM user 
-                               // LEFT JOIN roles ON user.rol= roles.id ");
-                                //while ($fila = mysqli_fetch_assoc($result)):
-    
-                                    ?>
-
-                            <!-- Dropdown - User Information -->
                             <div class="dropdown-menu dropdown-menu-right shadow animated--grow-in"
                                 aria-labelledby="userDropdown">
  
@@ -356,8 +335,7 @@ die();
                     </ul>
 
                 </nav>
-                <!-- End of Topbar -->
-               <?php  //endwhile;?>
+
                                 
     <?php include "../views/salir.php";?>
     

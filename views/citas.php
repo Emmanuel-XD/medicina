@@ -1,14 +1,16 @@
 <?php
-// Seguridad de sesiones
 session_start();
-error_reporting(0);
-$varsesion = $_SESSION['nombre'];
+$typeUser = $_SESSION['rol'];
+if($typeUser === '2' || $typeUser ==='1'){
 
-	if($varsesion== null || $varsesion= ''){
-
-	    header("Location: ../includes/_sesion/login.php");
-	die();
-	} 
+    error_reporting(0);
+    $varsesion = $_SESSION['nombre'];
+    
+    if ($varsesion == null || $varsesion = '') {
+    
+        header("Location: ../includes/_sesion/login.php");
+        die();
+    }
     ?>
 
 <!DOCTYPE html>
@@ -159,3 +161,11 @@ Swal.fire({
 </body>
 
 </html>
+<?php }
+else {
+?>
+<div id="notAllow" ></div>
+<script src="https://code.jquery.com/jquery-3.6.3.min.js"></script>
+<script  src="../js/not-allowed.js"></script>
+<script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script><?php
+}?>
