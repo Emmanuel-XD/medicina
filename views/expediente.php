@@ -27,7 +27,7 @@ $pdf->SetFont('Arial','B',20);
 
 $pdf->setY(12);
 $pdf->setX(80);
-
+$pdf-> image('../img/imss.png', 10, 1, 20);  // X, Y, Tamaño
 $pdf->Cell(60,4,'EXPEDIENTE MEDICO',0,1,'C');
 $pdf->Ln();
 
