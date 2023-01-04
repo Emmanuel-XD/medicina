@@ -66,9 +66,8 @@ if ($varsesion == null || $varsesion = '' && $typeUser == null || $typeUser == '
                                 Acceso
                             </a>
                             <ul class="dropdown-menu">
-                                <li><a class="dropdown-item" data-toggle="modal" data-target="#user">Administracion</a></li>
+                                <li><a class="dropdown-item" data-toggle="modal" data-target="#user">Administración</a></li>
                                 <li><a class="dropdown-item " data-toggle="modal" data-target="#login">Usuario</a></li>
-                                <li><a class="dropdown-item" href="./views/index.php"></a></li>
                             </ul>
                         </li>
 

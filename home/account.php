@@ -23,6 +23,7 @@
                             <div class="form-group">
                                 <label for="password">Contraseña:</label><br>
                                 <input type="password" name="password" id="passwordUser" class="form-control" required>
+                                <a href="">¿Olvido su contraseña?</a>
                             </div>
 
                             <input type="hidden" name="accion" value="acceso_paciente">
