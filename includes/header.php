@@ -128,7 +128,8 @@ die();
                     <div class="bg-white py-2 collapse-inner rounded">
                         <h6 class="collapse-header">Ver Medicos:</h6>
                         <a class="collapse-item" href="../views/medicos.php">Mostrar</a>
-          
+                        <a class="collapse-item" href="../views/medicamentos.php">Medicamentos</a>
+                        <a class="collapse-item" href="../views/recetas.php">Recetas</a>
                     </div>
                 </div>
             </li>

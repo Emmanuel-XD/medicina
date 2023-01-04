@@ -42,8 +42,16 @@ if (isset($_POST['accion'])) {
             insertar_horario();
             break;
 
+        case 'insertar_receta';
+            insertar_receta();
+            break;
+
         case 'insertar_esp';
             insertar_esp();
+            break;
+
+        case 'insertar_medicamento';
+            insertar_medicamento();
             break;
 
         case 'editar_user':
@@ -74,6 +82,14 @@ if (isset($_POST['accion'])) {
         case 'editar_cita':
             editar_cita();
             break;
+
+        case 'editar_medicamento':
+            editar_medicamento();
+            break;
+
+        case 'editar_receta':
+            editar_receta();
+            break;
     }
 }
 
@@ -91,12 +107,10 @@ function acceso_user()
     $consulta = "SELECT*FROM user where nombre='$nombre' and password='$password'";
     $resultado = mysqli_query($conexion, $consulta);
     $filas = mysqli_fetch_array($resultado);
-    if($filas['rol'])
-    {
-         if ($filas['rol'] == 1) {
+    if ($filas['rol']) {
+        if ($filas['rol'] == 1) {
             $_SESSION['rol'] = $filas['rol'];
             echo json_encode("login_success");
-
         }
         if ($filas['rol'] == 2) { //doctor
             $_SESSION['rol'] = $filas['rol'];
@@ -106,12 +120,11 @@ function acceso_user()
             echo json_encode("userType_error");
             session_destroy();
         }
-    }
-        else {
+    } else {
 
-            echo json_encode("session_error");
-            session_destroy();
-        }
+        echo json_encode("session_error");
+        session_destroy();
+    }
 }
 
 function acceso_paciente()
@@ -128,13 +141,12 @@ function acceso_paciente()
     $resultado = mysqli_query($conexion, $consulta);
     $filas = mysqli_fetch_array($resultado);
 
-    if($filas['rol']){
+    if ($filas['rol']) {
         if ($filas['rol'] == 3) {
-        $_SESSION['rol'] = $filas['rol'];
-        $_SESSION['id'] = $filas['id'];
-        echo json_encode("login_success");
-
-         }
+            $_SESSION['rol'] = $filas['rol'];
+            $_SESSION['id'] = $filas['id'];
+            echo json_encode("login_success");
+        }
         if ($filas['rol'] == 2) { //doctor
 
             echo json_encode("userType_error");
@@ -144,8 +156,7 @@ function acceso_paciente()
             echo json_encode("userType_error");
             session_destroy();
         }
-    }
-     else {
+    } else {
         echo json_encode("session_error");
         session_destroy();
     }
@@ -190,6 +201,27 @@ function insertar_cita2()
         echo "<script language='JavaScript'>
          alert('Algo salio mal. Intentalo de nuevo');
          location.assign('../home/agendar.php');
+         </script>";
+    }
+}
+
+function insertar_medicamento()
+{
+    include "db.php";
+    extract($_POST);
+    $consulta = "INSERT INTO medicamentos (caducidad, medicamento, marca, cantidad , entrada, salida)
+      VALUES ('$caducidad', '$medicamento', '$marca', '$cantidad',  '$entrada' ,  '$salida')";
+    $resultado = mysqli_query($conexion, $consulta);
+
+    if ($resultado) {
+        echo "<script language='JavaScript'>
+        alert('El registro fue guardado correctamente');
+        location.assign('../views/medicamentos.php');
+        </script>";
+    } else {
+        echo "<script language='JavaScript'>
+         alert('Algo salio mal. Intentalo de nuevo');
+         location.assign('../views/medicamentos.php');
          </script>";
     }
 }
@@ -307,6 +339,27 @@ function insertar_esp()
     }
 }
 
+function insertar_receta()
+{
+    include "db.php";
+    extract($_POST);
+    $consulta = "INSERT INTO recetas (id_doctor, id_medicamento, id_paciente, fecha , diagnostico)
+      VALUES ('$id_doctor', '$id_medicamento', '$id_paciente', '$fecha',  '$diagnostico' )";
+    $resultado = mysqli_query($conexion, $consulta);
+
+    if ($resultado) {
+        echo "<script language='JavaScript'>
+        alert('El registro fue guardado correctamente');
+        location.assign('../views/recetas.php');
+        </script>";
+    } else {
+        echo "<script language='JavaScript'>
+         alert('Algo salio mal. Intentalo de nuevo');
+         location.assign('../views/recetas.php');
+         </script>";
+    }
+}
+
 function editar_user()
 {
     include "db.php";
@@ -335,10 +388,10 @@ function editar_perfil()
     extract($_POST);
     $consulta = "UPDATE user SET nombre = '$nombre', correo = '$correo' WHERE id = '$id' ";
     $resultado = mysqli_query($conexion, $consulta);
-    if($resultado === true){
+    if ($resultado === true) {
         echo json_encode("updated");
     }
-    if($resultado === false){
+    if ($resultado === false) {
         echo json_encode("error");
     }
 }
@@ -446,6 +499,50 @@ function editar_cita()
         echo "<script language='JavaScript'>
         alert('Algo salio mal. Intentalo de nuevo');
          location.assign('../views/citas.php');
+         </script>";
+    }
+}
+
+function editar_medicamento()
+{
+    include "db.php";
+    extract($_POST);
+    $consulta = "UPDATE medicamentos SET caducidad = '$caducidad', medicamento = '$medicamento', marca = '$marca', cantidad = '$cantidad',
+     entrada= '$entrada', salida = '$salida' WHERE id = '$id' ";
+    $resultado = mysqli_query($conexion, $consulta);
+
+    if ($resultado) {
+        echo "<script language='JavaScript'>
+        alert('El registro fue actualizado correctamente');
+        location.assign('../views/medicamentos.php');
+        </script>";
+    } else {
+        echo "<script language='JavaScript'>
+        alert('Algo salio mal. Intentalo de nuevo');
+        location.assign('../views/medicamentos.php');
+         </script>";
+    }
+}
+
+
+
+function editar_receta()
+{
+    include "db.php";
+    extract($_POST);
+    $consulta = "UPDATE recetas SET id_doctor = '$id_doctor', id_medicamento = '$id_medicamento', id_paciente = '$id_paciente',
+     fecha= '$fecha', diagnostico = '$diagnostico' WHERE id = '$id' ";
+    $resultado = mysqli_query($conexion, $consulta);
+
+    if ($resultado) {
+        echo "<script language='JavaScript'>
+        alert('El registro fue actualizado correctamente');
+        location.assign('../views/recetas.php');
+        </script>";
+    } else {
+        echo "<script language='JavaScript'>
+        alert('Algo salio mal. Intentalo de nuevo');
+        location.assign('../views/recetas.php');
          </script>";
     }
 }
