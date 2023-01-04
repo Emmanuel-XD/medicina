@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Servidor: 127.0.0.1
--- Tiempo de generación: 24-12-2022 a las 07:44:48
+-- Tiempo de generación: 04-01-2023 a las 01:13:18
 -- Versión del servidor: 10.4.20-MariaDB
 -- Versión de PHP: 8.0.8
 
@@ -43,7 +43,14 @@ CREATE TABLE `citas` (
 
 INSERT INTO `citas` (`id`, `fecha`, `hora`, `id_paciente`, `id_doctor`, `estado`, `fecha_registro`) VALUES
 (17, '2022-12-23', '18:48:00', 11, 8, 1, '2022-12-24 00:46:32'),
-(18, '2022-12-31', '12:30:00', 14, 8, 1, '2022-12-24 06:12:40');
+(18, '2022-12-31', '12:30:00', 14, 8, 1, '2022-12-24 06:12:40'),
+(20, '2022-12-31', '10:30:00', 21, 8, 1, '2022-12-24 15:35:41'),
+(21, '2022-12-24', '17:20:00', 11, 6, 2, '2022-12-24 22:20:57'),
+(22, '2022-12-27', '18:40:00', 21, 6, 1, '2022-12-24 22:41:08'),
+(25, '2022-12-20', '19:30:00', 14, 7, 1, '2022-12-24 23:25:54'),
+(26, '2022-12-01', '10:30:00', 21, 6, 2, '2022-12-24 23:26:54'),
+(27, '2023-01-01', '09:30:00', 10, 6, 1, '2022-12-24 23:28:27'),
+(28, '2022-12-25', '07:00:00', 21, 8, 1, '2022-12-24 23:58:31');
 
 -- --------------------------------------------------------
 
@@ -74,7 +81,7 @@ CREATE TABLE `doctor` (
 INSERT INTO `doctor` (`id`, `cedula`, `name`, `apellidos`, `correo`, `id_horario`, `id_especialidad`, `sexo`, `telefono`, `direccion`, `fecha`, `fecha_registro`, `id_rol`) VALUES
 (6, 101, 'Ejemplo', 'Example', 'mugarte5672@gmail.com.mx', 4, 6, 'Masculino', '99111656701', '0', '2022-09-05', '2022-09-05 15:56:14', 0),
 (7, 4535463, 'usuario', 'user', 'Usuario@gmail.mx.com', 1, 1, 'Masculino', '549481512', 'xxss', '2022-12-25', '2022-12-23 17:58:09', 0),
-(8, 4578, 'Jonn', 'Campos', 'campos12@gmail.com', 5, 8, 'Masculino', '99111656701', 'dgdfgh', '2022-12-31', '2022-12-23 23:55:41', 0);
+(8, 4578, 'Jonn', 'Campos', 'campos12@gmail.com', 6, 8, 'Masculino', '99111656701', 'dgdfgh', '2022-12-31', '2022-12-23 23:55:41', 0);
 
 -- --------------------------------------------------------
 
@@ -138,9 +145,9 @@ CREATE TABLE `horario` (
 
 INSERT INTO `horario` (`id`, `dias`, `id_doctor`, `fecha`) VALUES
 (1, 'Lunes', 6, '2022-08-25 06:02:19'),
-(4, 'Domingos', 0, '2022-08-25 16:44:49'),
-(5, 'Martes, Miercoles', 0, '2022-12-23 18:03:05'),
-(6, 'Martes', 8, '2022-12-24 00:20:36');
+(4, 'Domingos', 7, '2022-08-25 16:44:49'),
+(5, 'Martes, Miercoles', 7, '2022-12-23 18:03:05'),
+(6, 'Martes, Jueves', 8, '2022-12-24 00:20:36');
 
 -- --------------------------------------------------------
 
@@ -150,11 +157,20 @@ INSERT INTO `horario` (`id`, `dias`, `id_doctor`, `fecha`) VALUES
 
 CREATE TABLE `medicamentos` (
   `id` int(11) NOT NULL,
-  `caducidad` varchar(50) NOT NULL,
-  `nombre` varchar(50) NOT NULL,
+  `caducidad` date NOT NULL,
+  `medicamento` varchar(50) NOT NULL,
   `marca` varchar(50) NOT NULL,
-  `id_receta` int(11) NOT NULL
+  `cantidad` int(11) NOT NULL,
+  `entrada` date NOT NULL,
+  `salida` date NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+--
+-- Volcado de datos para la tabla `medicamentos`
+--
+
+INSERT INTO `medicamentos` (`id`, `caducidad`, `medicamento`, `marca`, `cantidad`, `entrada`, `salida`) VALUES
+(2, '2023-01-03', 'Prueba', 'FERMONT', 20, '2023-01-03', '2023-01-11');
 
 -- --------------------------------------------------------
 
@@ -181,17 +197,19 @@ CREATE TABLE `pacientes` (
   `alergias` varchar(150) NOT NULL,
   `curp` varchar(150) NOT NULL,
   `fecha` timestamp NULL DEFAULT current_timestamp(),
-  `estado` varchar(50) NOT NULL
+  `estado` varchar(50) NOT NULL,
+  `id_user` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 --
 -- Volcado de datos para la tabla `pacientes`
 --
 
-INSERT INTO `pacientes` (`id`, `nombre`, `apellidos`, `correo`, `edad`, `ocupacion`, `sexo`, `estado_civil`, `peso`, `nacimiento`, `familiar`, `telefono`, `direccion`, `enfermedad`, `tipo_sangre`, `alergias`, `curp`, `fecha`, `estado`) VALUES
-(10, 'usuarios', 'ws', 'Usuario@gmail.coms', '10', 'www', 'Femenino', 'saa', '100', '2022-12-30', '1', '99111656701', '1', 'ee', 'j', 'ee', 'fdgfdhgfdhgfdhfdhg', '2022-12-23 17:38:23', 'Atendido'),
-(11, 'Max', 'White', 'example@gmail.com', '10', 'No lose', 'Masculino', 'Calle 20', '50', '2022-12-31', 'Ejemplo', '9911165670', 'Cancun', 'SIDA', 'o+', 'No', 'dfrgfchdfghsdth', '2022-12-24 00:32:56', 'Pendiente'),
-(14, 'Emmanuel', 'Poot Mugarte', 'mugarte5672@gmail.com', '21', 'Ninguna', 'Masculino', 'Soltero', '65', '2022-12-23', 'Efe', '9911165670', 'Mexico', 'Ninguna', '0-', 'No', 'POMP010314HYNTGRA6', '2022-12-24 05:57:45', 'Pendiente');
+INSERT INTO `pacientes` (`id`, `nombre`, `apellidos`, `correo`, `edad`, `ocupacion`, `sexo`, `estado_civil`, `peso`, `nacimiento`, `familiar`, `telefono`, `direccion`, `enfermedad`, `tipo_sangre`, `alergias`, `curp`, `fecha`, `estado`, `id_user`) VALUES
+(10, 'usuarios', 'ws', 'Usuario@gmail.coms', '10', 'www', 'Femenino', 'saa', '100', '2022-12-30', '1', '99111656701', '1', 'ee', 'j', 'ee', 'fdgfdhgfdhgfdhfdhg', '2022-12-23 17:38:23', 'Atendido', 0),
+(11, 'Max', 'White', 'example@gmail.com', '10', 'No lose', 'Masculino', 'Calle 20', '50', '2022-12-31', 'Ejemplo', '9911165670', 'Cancun', 'SIDA', 'o+', 'No', 'dfrgfchdfghsdth', '2022-12-24 00:32:56', 'Pendiente', 0),
+(14, 'Emmanuel', 'Poot Mugarte', 'mugarte5672@gmail.com', '21', 'Ninguna', 'Masculino', 'Soltero', '65', '2022-12-23', 'Efe', '9911165670', 'Mexico', 'Ninguna', '0-', 'No', 'POMP010314HYNTGRA6', '2022-12-24 05:57:45', 'Pendiente', 0),
+(21, 'America ', 'Gomez Chavez', 'example@gmail.mx', '28', 'Ninguna', 'Femenino', 'Casado(a)', '50', '2022-12-24', 'Nadie', '9911165670', 'Veracruz', 'Ninguna', 'O+', 'No', '123456789123456789', '2022-12-24 15:33:04', 'Pendiente', 18);
 
 -- --------------------------------------------------------
 
@@ -207,6 +225,15 @@ CREATE TABLE `recetas` (
   `fecha` date NOT NULL,
   `diagnostico` varchar(250) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+--
+-- Volcado de datos para la tabla `recetas`
+--
+
+INSERT INTO `recetas` (`id`, `id_doctor`, `id_medicamento`, `id_paciente`, `fecha`, `diagnostico`) VALUES
+(1, 6, 2, 21, '2023-01-03', 'Prueba'),
+(3, 8, 2, 11, '2023-01-12', 'Tiene SIDA Y VIH\r\n\r\n'),
+(4, 8, 2, 11, '2023-01-11', 'XXXX');
 
 -- --------------------------------------------------------
 
@@ -252,7 +279,8 @@ INSERT INTO `user` (`id`, `nombre`, `correo`, `password`, `fecha`, `rol`) VALUES
 (12, 'user', 'usuario@gmail.com', '12345', '2022-08-27 16:43:37', 2),
 (13, 'Administrador', 'admin@softcodepm.com', '12345', '2022-08-29 14:22:36', 1),
 (15, 'Alejandro', 'user@gmail.com.mx', '12345', '2022-12-23 19:01:58', 1),
-(17, 'Prueba', 'prueba@gmail.com', '12345', '2022-12-24 05:40:52', 3);
+(17, 'Prueba', 'prueba@gmail.com', '12345', '2022-12-24 05:40:52', 3),
+(18, 'Ejemplo', 'example@gmail.mx', '12345', '2022-12-24 15:12:39', 3);
 
 --
 -- Índices para tablas volcadas
@@ -329,7 +357,7 @@ ALTER TABLE `user`
 -- AUTO_INCREMENT de la tabla `citas`
 --
 ALTER TABLE `citas`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=19;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=29;
 
 --
 -- AUTO_INCREMENT de la tabla `doctor`
@@ -359,19 +387,19 @@ ALTER TABLE `horario`
 -- AUTO_INCREMENT de la tabla `medicamentos`
 --
 ALTER TABLE `medicamentos`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
 
 --
 -- AUTO_INCREMENT de la tabla `pacientes`
 --
 ALTER TABLE `pacientes`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=15;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=22;
 
 --
 -- AUTO_INCREMENT de la tabla `recetas`
 --
 ALTER TABLE `recetas`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
 
 --
 -- AUTO_INCREMENT de la tabla `roles`
@@ -383,7 +411,7 @@ ALTER TABLE `roles`
 -- AUTO_INCREMENT de la tabla `user`
 --
 ALTER TABLE `user`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=18;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=19;
 
 --
 -- Restricciones para tablas volcadas
