@@ -1,0 +1,15 @@
+.formreset{
+    margin-top: 100px;
+
+}
+.form-ex{
+    padding: 50px;
+    border-radius: 17px;
+    background-color: rgb(45, 45, 54);
+    color: aliceblue;
+    text-align: center;
+}
+.form-ex input{
+    
+    margin-bottom: 30px;
+}

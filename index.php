@@ -9,7 +9,7 @@ if ($varsesion == null || $varsesion = '' && $typeUser == null || $typeUser == '
 
 ?>
     <!DOCTYPE html>
-    <html lang="en">
+z    <html lang="en">
 
     <head>
         <meta charset="utf-8" />
