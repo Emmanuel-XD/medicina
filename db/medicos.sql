@@ -2,10 +2,10 @@
 -- version 5.2.0
 -- https://www.phpmyadmin.net/
 --
--- Servidor: 127.0.0.1
--- Tiempo de generación: 04-01-2023 a las 01:13:18
--- Versión del servidor: 10.4.20-MariaDB
--- Versión de PHP: 8.0.8
+-- Servidor: localhost
+-- Tiempo de generación: 06-01-2023 a las 04:59:13
+-- Versión del servidor: 10.4.25-MariaDB
+-- Versión de PHP: 8.1.10
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 START TRANSACTION;
@@ -214,6 +214,19 @@ INSERT INTO `pacientes` (`id`, `nombre`, `apellidos`, `correo`, `edad`, `ocupaci
 -- --------------------------------------------------------
 
 --
+-- Estructura de tabla para la tabla `password_reset_temp`
+--
+
+CREATE TABLE `password_reset_temp` (
+  `id` int(11) NOT NULL,
+  `email` varchar(250) NOT NULL,
+  `key` varchar(250) NOT NULL,
+  `expDate` datetime NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+-- --------------------------------------------------------
+
+--
 -- Estructura de tabla para la tabla `recetas`
 --
 
@@ -265,7 +278,7 @@ CREATE TABLE `user` (
   `id` int(11) NOT NULL,
   `nombre` varchar(50) NOT NULL,
   `correo` varchar(50) NOT NULL,
-  `password` varchar(50) NOT NULL,
+  `password` varchar(300) NOT NULL,
   `fecha` timestamp NOT NULL DEFAULT current_timestamp(),
   `rol` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
@@ -278,9 +291,10 @@ INSERT INTO `user` (`id`, `nombre`, `correo`, `password`, `fecha`, `rol`) VALUES
 (11, 'Emanuel', 'mugarte5672@gmail.com', '12345', '2022-08-27 16:43:19', 1),
 (12, 'user', 'usuario@gmail.com', '12345', '2022-08-27 16:43:37', 2),
 (13, 'Administrador', 'admin@softcodepm.com', '12345', '2022-08-29 14:22:36', 1),
-(15, 'Alejandro', 'user@gmail.com.mx', '12345', '2022-12-23 19:01:58', 1),
+(15, 'Alejandro', 'jalegalarza@gmail.com', '$2y$05$PrDlX8cPuoC.Yp2SIJEbSOkZqr82GWjPBWPSvUIKIfQwpxhX/PkU6', '2022-12-23 19:01:58', 1),
 (17, 'Prueba', 'prueba@gmail.com', '12345', '2022-12-24 05:40:52', 3),
-(18, 'Ejemplo', 'example@gmail.mx', '12345', '2022-12-24 15:12:39', 3);
+(18, 'Ejemplo', 'example@gmail.mx', '12345', '2022-12-24 15:12:39', 3),
+(19, 'Alejandro2312', 'jabona3158@letpays.com', '$2y$05$LtLtkrYP2686T/ONrYNXEuPQ9pItG6A1gzGiFSFfwfsXGa5nlOvKe', '2023-01-06 03:57:57', 3);
 
 --
 -- Índices para tablas volcadas
@@ -328,6 +342,12 @@ ALTER TABLE `medicamentos`
 ALTER TABLE `pacientes`
   ADD PRIMARY KEY (`id`),
   ADD UNIQUE KEY `correo` (`correo`);
+
+--
+-- Indices de la tabla `password_reset_temp`
+--
+ALTER TABLE `password_reset_temp`
+  ADD PRIMARY KEY (`id`);
 
 --
 -- Indices de la tabla `recetas`
@@ -396,6 +416,12 @@ ALTER TABLE `pacientes`
   MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=22;
 
 --
+-- AUTO_INCREMENT de la tabla `password_reset_temp`
+--
+ALTER TABLE `password_reset_temp`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
+
+--
 -- AUTO_INCREMENT de la tabla `recetas`
 --
 ALTER TABLE `recetas`
@@ -411,7 +437,7 @@ ALTER TABLE `roles`
 -- AUTO_INCREMENT de la tabla `user`
 --
 ALTER TABLE `user`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=19;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=20;
 
 --
 -- Restricciones para tablas volcadas

@@ -29,7 +29,11 @@
                     </div>
                     <div class="form-group">
                         <label for="password">Contraseña:</label><br>
-                        <input type="password" name="password" id="password" class="form-control" placeholder="Escribe tu contraseña 1-8 digitos" required>
+                        <input type="password" name="password" id="password" class="form-control" placeholder="Escribe tu contraseña" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="password">Confirmar contraseña:</label><br>
+                        <input type="password" name="password2" id="password2" class="form-control" placeholder="Escribe tu contraseña" required>
                     </div>
 
                     <div class="form-group">
@@ -60,66 +64,48 @@
 <script src="../package/dist/sweetalert2.all.min.js"></script>
 
 <script type="text/javascript">
-    $(function() {
         $('#register').click(function(e) {
-
+            e.preventDefault();
             var valid = this.form.checkValidity();
 
             if (valid) {
+                var datos = new FormData();
+                datos.append('nombre', $('#nombre').val())
+                datos.append('correo', $('#correo').val())
+                datos.append('password', $('#password').val())
+                datos.append('password2', $('#password2').val())
+                datos.append('rol', $('#rol').val())
 
+                fetch('../includes/_sesion/validar.php',{
+                    method: 'POST',
+                    body: datos,
+                }).then((response) => response.json()).then((response => {confirmation (response); }))
 
-                var nombre = $('#nombre').val();
-                var correo = $('#correo').val();
-                var password = $('#password').val();
-                var rol = $('#rol').val();
+}});
 
-
-                e.preventDefault();
-
-                $.ajax({
-                    type: 'POST',
-                    url: '../includes/_sesion/validar.php',
-                    data: {
-                        nombre: nombre,
-                        correo: correo,
-                        password: password,
-                        rol: rol
-                    },
-                    success: function(data) {
+    function confirmation(r){
+        if(r === 'success'){
                         Swal.fire({
                             'title': '¡Mensaje!',
-                            'text': data,
+                            'text': 'usuario creado',
                             'icon': 'success',
                             'showConfirmButton': 'false',
                             'timer': '1500'
                         }).then(function() {
                             window.location = "paciente.php";
                         });
-
-                    },
-
-                    error: function(data) {
+                    }
+                        if(r === 'error'){
                         Swal.fire({
                             'title': 'Error',
-                            'text': data,
+                            'text': 'No se creo el usuario',
                             'icon': 'error'
                         })
                     }
-                });
 
 
-            } else {
+            } 
 
-            }
-
-
-
-
-
-        });
-
-
-    });
 </script>
 </body>
 

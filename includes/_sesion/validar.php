@@ -13,22 +13,29 @@
 			$nombre = trim($_POST['nombre']);
 			$correo = trim($_POST['correo']);
 			$password = trim($_POST['password']);
+			$password2 = trim($_POST['password2']);
 			$rol= trim($_POST['rol']);
+			if(strcmp($password, $password2) !== 0)
+        {
+            echo json_encode('error');
 
-
+        }else{
+			$password = password_hash($password, PASSWORD_DEFAULT, ['cost' => 5]);
 		$consulta = "INSERT INTO user (nombre, correo,  password, rol)
 			VALUES ('$nombre', '$correo', '$password', '$rol')";
 		$resultado=mysqli_query($conexion, $consulta);
 
 			if($resultado){
-	echo'El registro fue guardado correctamente';
+	echo json_encode('success');
 		
 			}else{
-				echo 'Ocurrio un error al guardar los datos';
+				echo json_encode('error');
 			}
+		}
 	}else{
 		echo 'No data';
 	}
+
 	}
 
 

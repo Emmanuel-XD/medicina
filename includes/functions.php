@@ -1,5 +1,7 @@
 <?php
-
+ini_set('display_errors', 1);
+ini_set('display_startup_errors', 1);
+error_reporting(E_ALL);
 require_once("db.php");
 
 
@@ -104,20 +106,29 @@ function acceso_user()
     session_start();
     $_SESSION['nombre'] = $nombre;
 
-    $consulta = "SELECT*FROM user where nombre='$nombre' and password='$password'";
+    $consulta = "SELECT*FROM user where nombre='$nombre'";
     $resultado = mysqli_query($conexion, $consulta);
-    $filas = mysqli_fetch_array($resultado);
-    if ($filas['rol']) {
-        if ($filas['rol'] == 1) {
+    $filas = mysqli_fetch_assoc($resultado);
+    $user_data = [
+        'rol' => $filas['rol'],
+        'password' => $filas['password'],
+    ];
+    if ($user_data['rol']) {
+        if ($user_data['rol'] == 1 && password_verify($password, $user_data['password'])) {
             $_SESSION['rol'] = $filas['rol'];
             echo json_encode("login_success");
         }
-        if ($filas['rol'] == 2) { //doctor
+        if ($user_data['rol'] == 2 && password_verify($password, $filas['password'])) { //doctor
             $_SESSION['rol'] = $filas['rol'];
             echo json_encode("login_success");
         }
-        if ($filas['rol'] == 3) { //paciente
+        if ($user_data['rol'] == 3) { //paciente
             echo json_encode("userType_error");
+            session_destroy();
+        }
+        if(!password_verify($password, $filas['password']))
+        {
+            echo json_encode("session_error");
             session_destroy();
         }
     } else {
@@ -137,23 +148,32 @@ function acceso_paciente()
     session_start();
     $_SESSION['nombre'] = $nombre;
 
-    $consulta = "SELECT*FROM user where nombre='$nombre' and password='$password'";
+    $consulta = "SELECT*FROM user where nombre='$nombre'";
+ 
     $resultado = mysqli_query($conexion, $consulta);
-    $filas = mysqli_fetch_array($resultado);
-
-    if ($filas['rol']) {
-        if ($filas['rol'] == 3) {
+    $filas = mysqli_fetch_assoc($resultado);
+    $user_data = [
+        'rol' => $filas['rol'],
+        'password' => $filas['password'],
+    ];
+    if ($user_data['rol']) {
+        if ($filas['rol'] == 3 && password_verify($password, $user_data['password'])) {
             $_SESSION['rol'] = $filas['rol'];
             $_SESSION['id'] = $filas['id'];
             echo json_encode("login_success");
         }
-        if ($filas['rol'] == 2) { //doctor
+        if ($user_data['rol'] == 2 && password_verify($password, $user_data['password'])) { //doctor
 
             echo json_encode("userType_error");
             session_destroy();
         }
-        if ($filas['rol'] == 1) { //paciente
+        if ($user_data['rol'] == 1 && password_verify($password, $user_data['password'])) { //paciente
             echo json_encode("userType_error");
+            session_destroy();
+        }
+        if(!password_verify($password, $filas['password']))
+        {
+            echo json_encode("session_error");
             session_destroy();
         }
     } else {

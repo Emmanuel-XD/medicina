@@ -13,3 +13,21 @@
     
     margin-bottom: 30px;
 }
+a {
+    text-decoration: none;
+}
+
+.log {
+    padding-right: 20px;
+    height: 50px;
+    width: 70px;
+}
+
+.bar {
+    border: 0;
+    vertical-align: middle;
+    height: auto;
+    max-width: 100%;
+    outline: 0 none;
+
+}

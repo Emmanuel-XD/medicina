@@ -14,29 +14,7 @@
         <script src="../js/cont/jquery.min.js"></script>
         <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-validate/1.19.5/jquery.validate.min.js"></script>
         <script src="../js/cont/bootstrap.min.js"></script>
-        <style>
-            a {
-                text-decoration: none;
-            }
-
-            .log {
-                padding-right: 20px;
-                height: 50px;
-                width: 70px;
-            }
-
-            .bar {
-                border: 0;
-                vertical-align: middle;
-                height: auto;
-                max-width: 100%;
-                outline: 0 none;
-
-            }
-        </style>
-
-
-    <title>Document</title>
+    <title>Recuperar contraseña</title>
 </head>
 <body>
 <nav class="navbar navbar-expand-lg navbar-dark bg-success fixed-top" id="mainNav">
