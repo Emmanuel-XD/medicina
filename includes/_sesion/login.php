@@ -26,14 +26,14 @@ if ($varsesion == null || $varsesion = '') {
                         </div>
                         <div class="form-group">
                             <label for="nombre" class="form-label">Nombre *</label>
-                            <input type="text" name="nombre" id="nombreAdmin" class="nombre form-control" required>
+                            <input type="text" name="nombre" id="correoAdmin" class="logininp form-control" required>
                         </div>
 
                         <br>
 
                         <div class="form-group">
                             <label for="password">Contraseña:</label><br>
-                            <input type="password" name="password" id="passwordAdmin" class="password form-control" required>
+                            <input type="password" name="password" id="passwordAdmin" class="logininp form-control" required>
                         </div>
                         <br>
 

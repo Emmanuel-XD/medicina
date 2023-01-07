@@ -14,15 +14,15 @@
                 <div class="alerts">
                 </div>
                             <div class="form-group">
-                            <label for="nombre" class="form-label">Nombre *</label>
-                            <input type="text"  id="nombreUser" name="nombre" class="form-control" required>
+                            <label for="correo" class="form-label">Correo *</label>
+                            <input type="text"  id="correoUser" name="correo" class="logininp form-control" required>
                             </div>
 
                             <br>
                           
                             <div class="form-group">
                                 <label for="password">Contraseña:</label><br>
-                                <input type="password" name="password" id="passwordUser" class="form-control" required>
+                                <input type="password" name="password" id="passwordUser" class="logininp form-control" required>
                                 <a href="includes/recovery.php">¿Olvido su contraseña?</a>
                             </div>
 

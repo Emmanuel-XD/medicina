@@ -26,7 +26,12 @@
 		$resultado=mysqli_query($conexion, $consulta);
 
 			if($resultado){
-	echo json_encode('success');
+				$sql = "SELECT id from user where correo = '$correo'";
+				$result=mysqli_query($conexion, $sql);
+				$rows = mysqli_fetch_assoc($result);
+				session_start();	
+				$_SESSION['id'] = $rows['id'];
+				echo json_encode('success');
 		
 			}else{
 				echo json_encode('error');

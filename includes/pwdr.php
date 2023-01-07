@@ -14,7 +14,7 @@ $email = filter_var($email, FILTER_VALIDATE_EMAIL);
 $query = "SELECT * FROM user WHERE correo = '$email'";
 $result = mysqli_query($conexion, $query);
 $rows = mysqli_num_rows($result);
-
+$data = mysqli_fetch_assoc($result);
 
 if($rows > 0){
 
@@ -24,20 +24,20 @@ if($rows > 0){
     $addKey = substr(md5(uniqid(rand(),1)),3,10);
     $key = $key . $addKey;
     mysqli_query($conexion, "INSERT INTO `password_reset_temp` (`email`, `key`, `expDate`) VALUES ('".$email."', '".$key."', '".$expDate."');");
-
-        $output='<p>Dear user,</p>';
-        $output.='<p>Please click on the following link to reset your password.</p>';
+        
+        $output='<p>Buen dia estimado/a: '.$data['nombre'].'</p>';
+        $output.='<p>Este correo es para restablecer tú contraseña.</p>';
         $output.='<p>-------------------------------------------------------------</p>';
-        $output.='<p><a href="localhost/medicina/includes/reset-password.php?key='.$key.'&email='.$email.'&action=reset" target="_blank">
-       CLICK HERE';		
+        $output.='<p><a href="localhost/medicina/includes/reset-password.php?key='.$key.'&email='.$email.'&action=reset" target="_blank">CLICK AQUI PARA RESTABLECER CONTRASEÑA</a>';		
         $output.='<p>-------------------------------------------------------------</p>';
-        $output.='<p>The link will expire after 1 day for security reason.</p>';
+        $output.='<p>El link expira en 1 dia por razones de seguridad.</p>';
         $output.='<p>Si tu no solicitaste este correo ignoralo</p>';   	
-        $output.='<p>Gracias,</p>';
+        $output.='<p>Gracias, Saludos cordiales</p>';
 
     $mail = new PHPMailer(true);
     try {
-        $mail->isSMTP();                                            
+        $mail->isSMTP();            
+        $mail->CharSet    = 'UTF-8';                                
         $mail->Host       = 'smtp.office365.com';                    
         $mail->SMTPAuth   = true;                                 
         $mail->Username   = 'managerpr@outlook.kr';                    
@@ -51,7 +51,7 @@ if($rows > 0){
     
         //Content
         $mail->isHTML(true);                                  //Set email format to HTML
-        $mail->Subject = 'Codigo de verificacion';
+        $mail->Subject = 'Codigo de verificación';
         $mail->Body    = $output;
         $mail->AltBody = '';
     

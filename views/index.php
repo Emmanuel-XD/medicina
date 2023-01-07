@@ -2,15 +2,6 @@
 // Seguridad de sesiones
 session_start();
 error_reporting(0);
-$varsesion = $_SESSION['nombre'];
-$typeUser = $_SESSION['nombre'];
-	if($varsesion== null || $varsesion= '' && $typeUser == null || $typeUser == ''){
-        ?>
-
-        <?php
-	} 
-
-
 include '../includes/header.php';
 
 ?>
@@ -21,12 +12,17 @@ include '../includes/header.php';
         <br>
 <!-- Page Heading -->
 <div class="d-sm-flex align-items-center justify-content-between mb-4">
+<?php  if ($typeUser === '1' || $typeUser === '2'){?>
     <h1 class="h3 mb-0 text-gray-800">Panel Administrativo</h1>
-    
+<?php }
+else{?>
+    <h1 class="h3 mb-0 text-gray-800">Panel de usuario</h1>
+<?php } ?>
 </div>
 
 
 <!-- Content Row -->
+<?php  if ($typeUser === '1' || $typeUser === '2'){?>
 <div class="row">
 
     <!-- Earnings (Monthly) Card Example -->
@@ -154,9 +150,43 @@ include '../includes/header.php';
         <!-- End of Content Wrapper -->
 
     </div>
+   <?php }
+   if($typeUser === '3'){ ?>
+       <div class="col-xl-3 col-md-6 mb-4">
+        <div class="card border-left-success shadow h-100 py-2">
+            <div class="card-body">
+                <div class="row no-gutters align-items-center">
+                    <div class="col mr-2">
+                        <a href="pacientes.php" class="text-xs font-weight-bold text-success text-uppercase mb-1">
+                            Tus citas</a>
+                        <div class="h5 mb-0 font-weight-bold text-gray-800">
+                        <?php 
+                               include "../includes/db.php"; 
+                                $usuario = $_SESSION["correo"];
+                                $SQL = "SELECT id from pacientes WHERE correo = '$usuario'";
+                                $dato = mysqli_query($conexion, $SQL);
+                                $rows = mysqli_fetch_assoc($dato);
+                                $id = $rows['id'];
+                                $SQL="SELECT id FROM citas WHERE id_paciente = '$id'";
+                                $dato = mysqli_query($conexion, $SQL);
+                                $fila= mysqli_num_rows($dato);
     
-    <!-- End of Page Wrapper -->  
+                                echo($fila); ?>
 
-<?php include '../includes/footer.php'; ?>
+                        </div>
+                    </div>
+                    <div class="col-auto">
+                    <i class="fa-solid fa fa-male fa-2x text-gray-300" aria-hidden="true"></i>
+             
+                      
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+ 
+<?php }?>
+<?php 
+include '../includes/footer.php'; ?>
 </html>
 

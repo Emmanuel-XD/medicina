@@ -101,41 +101,49 @@ function acceso_user()
     include("db.php");
     extract($_POST);
 
-    $nombre = $conexion->real_escape_string($_POST['nombre']);
+    $correo = $conexion->real_escape_string($_POST['correo']);
     $password = $conexion->real_escape_string($_POST['password']);
-    session_start();
-    $_SESSION['nombre'] = $nombre;
 
-    $consulta = "SELECT*FROM user where nombre='$nombre'";
+
+    $consulta = "SELECT*FROM user where correo='$correo'";
     $resultado = mysqli_query($conexion, $consulta);
     $filas = mysqli_fetch_assoc($resultado);
+    $rows = mysqli_num_rows($resultado);
+    if ($rows > 0){
     $user_data = [
         'rol' => $filas['rol'],
         'password' => $filas['password'],
+        'nombre' => $filas['nombre']
     ];
+
     if ($user_data['rol']) {
         if ($user_data['rol'] == 1 && password_verify($password, $user_data['password'])) {
+            session_start();
+            $_SESSION['nombre'] = $user_data['nombre'];
+            $_SESSION['correo'] = $correo;
             $_SESSION['rol'] = $filas['rol'];
             echo json_encode("login_success");
         }
         if ($user_data['rol'] == 2 && password_verify($password, $filas['password'])) { //doctor
+            session_start();
+            $_SESSION['nombre'] = $user_data['nombre'];
+            $_SESSION['correo'] = $correo;
             $_SESSION['rol'] = $filas['rol'];
             echo json_encode("login_success");
         }
         if ($user_data['rol'] == 3) { //paciente
             echo json_encode("userType_error");
-            session_destroy();
         }
         if(!password_verify($password, $filas['password']))
         {
             echo json_encode("session_error");
-            session_destroy();
+
         }
     } else {
 
         echo json_encode("session_error");
-        session_destroy();
     }
+}
 }
 
 function acceso_paciente()
@@ -143,21 +151,27 @@ function acceso_paciente()
     include("db.php");
     extract($_POST);
 
-    $nombre = $conexion->real_escape_string($_POST['nombre']);
+    $correo = $conexion->real_escape_string($_POST['correo']);
     $password = $conexion->real_escape_string($_POST['password']);
-    session_start();
-    $_SESSION['nombre'] = $nombre;
 
-    $consulta = "SELECT*FROM user where nombre='$nombre'";
+
+
+    $consulta = "SELECT*FROM user where correo ='$correo'";
  
     $resultado = mysqli_query($conexion, $consulta);
     $filas = mysqli_fetch_assoc($resultado);
+    $rows = mysqli_num_rows($resultado);
+    if ($rows > 0){
     $user_data = [
         'rol' => $filas['rol'],
         'password' => $filas['password'],
+        'nombre' => $filas['nombre']
     ];
     if ($user_data['rol']) {
         if ($filas['rol'] == 3 && password_verify($password, $user_data['password'])) {
+            session_start();
+            $_SESSION['correo'] = $correo;
+            $_SESSION['nombre'] = $user_data['nombre'];
             $_SESSION['rol'] = $filas['rol'];
             $_SESSION['id'] = $filas['id'];
             echo json_encode("login_success");
@@ -165,21 +179,22 @@ function acceso_paciente()
         if ($user_data['rol'] == 2 && password_verify($password, $user_data['password'])) { //doctor
 
             echo json_encode("userType_error");
-            session_destroy();
+
         }
         if ($user_data['rol'] == 1 && password_verify($password, $user_data['password'])) { //paciente
             echo json_encode("userType_error");
-            session_destroy();
+
         }
         if(!password_verify($password, $filas['password']))
         {
             echo json_encode("session_error");
-            session_destroy();
+
         }
     } else {
         echo json_encode("session_error");
-        session_destroy();
     }
+    
+}
 }
 
 function insertar_cita()
@@ -274,11 +289,13 @@ function insertar_paciente2()
 {
     include "db.php";
     extract($_POST);
+    session_start();
+    $id = $_SESSION['id'];
     $consulta = "INSERT INTO pacientes (nombre, apellidos, correo, edad , ocupacion,  sexo, estado_civil,
-    peso, nacimiento, familiar, telefono, direccion, enfermedad, tipo_sangre, alergias, curp, estado)
+    peso, nacimiento, familiar, telefono, direccion, enfermedad, tipo_sangre, alergias, curp, estado, id_user)
       VALUES ('$nombre', '$apellidos', '$correo', '$edad', '$ocupacion',  '$sexo',  '$estado_civil'
       ,  '$peso',  '$nacimiento',  '$familiar',  '$telefono',  '$direccion',  '$enfermedad',  '$tipo_sangre',  
-      '$alergias',  '$curp',  '$estado')";
+      '$alergias',  '$curp',  '$estado', $id)";
     $resultado = mysqli_query($conexion, $consulta);
 
     if ($resultado) {

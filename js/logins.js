@@ -31,7 +31,7 @@ e.preventDefault();
 if($("#formUser").valid()){
     var datos = new FormData();
     datos.append('accion', "acceso_paciente")
-    datos.append('nombre', $("#nombreUser").val())
+    datos.append('correo', $("#correoUser").val())
     datos.append('password',$("#passwordUser").val())
 
     fetch("./includes/functions.php",{
@@ -50,7 +50,7 @@ $("#loginAdmin").click(function (e) {
     if($("#formAdmin").valid()){
         var datos = new FormData();
         datos.append('accion', "acceso_user")
-        datos.append('nombre', $("#nombreAdmin").val())
+        datos.append('correo', $("#correoAdmin").val())
         datos.append('password',$("#passwordAdmin").val())
     
         fetch("./includes/functions.php",{
