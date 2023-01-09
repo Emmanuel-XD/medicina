@@ -40,6 +40,10 @@
                                 <label for="password">Contraseña:</label><br>
                                 <input type="password" name="password" id="password" class="form-control" required>
                             </div>
+                            <div class="form-group">
+                                <label for="password">Confirmar Contraseña:</label><br>
+                                <input type="password" name="password2" id="password2" class="form-control" required>
+                            </div>
 
                             <div class="form-group">
                                   <label for="rol" class="form-label">Rol de usuario:</label>

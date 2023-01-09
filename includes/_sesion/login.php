@@ -25,8 +25,8 @@ if ($varsesion == null || $varsesion = '') {
                         <div class="alerts">
                         </div>
                         <div class="form-group">
-                            <label for="nombre" class="form-label">Nombre *</label>
-                            <input type="text" name="nombre" id="correoAdmin" class="logininp form-control" required>
+                            <label for="nombre" class="form-label">Correo </label>
+                            <input type="email" name="nombre" id="correoAdmin" class="logininp form-control" required>
                         </div>
 
                         <br>
