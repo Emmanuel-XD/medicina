@@ -1,64 +1,58 @@
+<?php
 
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-	<meta http-equiv="X-UA-Compatible" content="ie-edge">
-    <title>Login</title>
-   
-    <link rel="stylesheet" type="text/css "href="../../css/styles.css">
 
-	<link rel="icon" href="assets/img/logo.jpg" type="image/x-icon"/>
-	<script src="../../js/fonts.js"></script>
-</head>
-<body>
-   <!--  <img class="wave"src="../assets/img/wave.png" alt="">  -->
-    <div class="contenedor">
-    <div class="img">
-    <img src="../../img/inicio.png" alt="">
+session_start();
+error_reporting(0);
+$varsesion = $_SESSION['nombre'];
+
+if ($varsesion == null || $varsesion = '') {
+    header("Location: ../../index.php");
+}
+?>
+
+<body id="page-top">
+    <div class="modal fade" id="user" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header bg-success text-white">
+                    <h3 class="modal-title" id="exampleModalLabel">Iniciar Sesion</h3>
+                    <button type="button" class="btn bg-success" data-dismiss="modal">
+                        <i class="fa fa-times" aria-hidden="true"></i></button>
+                </div>
+                <div class="modal-body">
+
+                    <form id="formAdmin">
+                        <div class="alerts">
+                        </div>
+                        <div class="form-group">
+                            <label for="nombre" class="form-label">Correo </label>
+                            <input type="email" name="nombre" id="correoAdmin" class="logininp form-control" required>
+                        </div>
+
+                        <br>
+
+                        <div class="form-group">
+                            <label for="password">Contraseña:</label><br>
+                            <input type="password" name="password" id="passwordAdmin" class="logininp form-control" required>
+                        </div>
+                        <br>
+
+                        <div class="mb-3">
+                            <center>
+                                <input type="button" value="Acceder" id="loginAdmin" class=" btn bg-success text-white" name="registrar">
+                                <br>
+
+
+                            </center>
+
+                        </div>
+                </div>
+            </div>
+
+            </form>
+        </div>
     </div>
-    <div class="contenido-login">
-
-
-    <form action="../_functions.php" method="POST">
-
-    <img src="../../img/user1.png" alt="">
-    <h2>My System PC</h2>
-    <h1 class="l">¡Bienvenido!</h1>
-   
-    <div class="input-div nit">
-    <div class="i">
-    <i class="fas fa-user"></i>
-    </div>
-    <div class="div">
-
-     <input type="text"  name="nombre" id="nombre"  placeholder="USUARIO">
     </div>
     </div>
-    <div class="input-div pass">
-    <div class="i">
-    <i class="fas fa-lock"></i>
     </div>
-    <div class="div">
-
-    <input type="password" name="password" id="password" placeholder="CONTRASEÑA" >
-
-    <input type="hidden" name="accion" value="acceso_user">
-    </div>
-    </div>
-
-   
-   
-    <button class="btn"  type="submit"> Iniciar sesion </button> 
-
     </form>
-    
-
-    </div>
-    </div>
- 
-	
-</body>
-
-</html>
