@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Servidor: localhost
--- Tiempo de generación: 06-01-2023 a las 04:59:13
+-- Tiempo de generación: 09-01-2023 a las 13:04:17
 -- Versión del servidor: 10.4.25-MariaDB
 -- Versión de PHP: 8.1.10
 
@@ -50,7 +50,11 @@ INSERT INTO `citas` (`id`, `fecha`, `hora`, `id_paciente`, `id_doctor`, `estado`
 (25, '2022-12-20', '19:30:00', 14, 7, 1, '2022-12-24 23:25:54'),
 (26, '2022-12-01', '10:30:00', 21, 6, 2, '2022-12-24 23:26:54'),
 (27, '2023-01-01', '09:30:00', 10, 6, 1, '2022-12-24 23:28:27'),
-(28, '2022-12-25', '07:00:00', 21, 8, 1, '2022-12-24 23:58:31');
+(28, '2022-12-25', '07:00:00', 21, 8, 1, '2022-12-24 23:58:31'),
+(29, '2023-01-13', '03:21:00', 22, 8, 1, '2023-01-07 08:19:31'),
+(30, '2023-01-11', '09:42:00', 23, 8, 1, '2023-01-09 10:43:00'),
+(31, '2023-01-11', '09:42:00', 23, 8, 1, '2023-01-09 10:46:04'),
+(32, '2023-01-19', '05:50:00', 23, 7, 1, '2023-01-09 10:47:35');
 
 -- --------------------------------------------------------
 
@@ -206,10 +210,12 @@ CREATE TABLE `pacientes` (
 --
 
 INSERT INTO `pacientes` (`id`, `nombre`, `apellidos`, `correo`, `edad`, `ocupacion`, `sexo`, `estado_civil`, `peso`, `nacimiento`, `familiar`, `telefono`, `direccion`, `enfermedad`, `tipo_sangre`, `alergias`, `curp`, `fecha`, `estado`, `id_user`) VALUES
-(10, 'usuarios', 'ws', 'Usuario@gmail.coms', '10', 'www', 'Femenino', 'saa', '100', '2022-12-30', '1', '99111656701', '1', 'ee', 'j', 'ee', 'fdgfdhgfdhgfdhfdhg', '2022-12-23 17:38:23', 'Atendido', 0),
-(11, 'Max', 'White', 'example@gmail.com', '10', 'No lose', 'Masculino', 'Calle 20', '50', '2022-12-31', 'Ejemplo', '9911165670', 'Cancun', 'SIDA', 'o+', 'No', 'dfrgfchdfghsdth', '2022-12-24 00:32:56', 'Pendiente', 0),
+(10, 'usuarios', 'ws', 'Usuario@gmail.coms', '10', 'www', 'Femenino', 'saa', '100', '2022-12-30', '1', '99111656701', '1', 'ee', 'j', 'ee', 'fdgfdhgfdhgfdhfdhg', '2022-12-23 17:38:23', 'Atendido', 11),
+(11, 'Max', 'White', 'jabona3158@letpays.com', '10', 'No lose', 'Masculino', 'Calle 20', '50', '2022-12-31', 'Ejemplo', '9911165670', 'Cancun', 'SIDA', 'o+', 'No', 'dfrgfchdfghsdth', '2022-12-24 00:32:56', 'Pendiente', 11),
 (14, 'Emmanuel', 'Poot Mugarte', 'mugarte5672@gmail.com', '21', 'Ninguna', 'Masculino', 'Soltero', '65', '2022-12-23', 'Efe', '9911165670', 'Mexico', 'Ninguna', '0-', 'No', 'POMP010314HYNTGRA6', '2022-12-24 05:57:45', 'Pendiente', 0),
-(21, 'America ', 'Gomez Chavez', 'example@gmail.mx', '28', 'Ninguna', 'Femenino', 'Casado(a)', '50', '2022-12-24', 'Nadie', '9911165670', 'Veracruz', 'Ninguna', 'O+', 'No', '123456789123456789', '2022-12-24 15:33:04', 'Pendiente', 18);
+(21, 'America ', 'Gomez Chavez', 'example@gmail.mx', '28', 'Ninguna', 'Femenino', 'Casado(a)', '50', '2022-12-24', 'Nadie', '9911165670', 'Veracruz', 'Ninguna', 'O+', 'No', '123456789123456789', '2022-12-24 15:33:04', 'Pendiente', 18),
+(22, 'Alejandro', 'Galarza', 'pruebas@outlook.co.nz', '32', 'Ninguna', 'Masculino', 'Soltero(a)', '34', '2022-06-07', 'Mama', '9981276091', '2190 Beech Street', 'no', 'o', 'no', 'GATA010624HQRLHLA8', '2023-01-07 08:17:16', 'Pendiente', 30),
+(23, 'Alejandro', 'Galarza', '00314412@red.unid.mx', '23', 'Ninguna', 'Masculino', 'Soltero(a)', '34', '2022-12-07', 'Mama', '9981276091', '2190 Beech Street', 'no', 'AB+', 'no', 'GATA010624HQRLHLA8', '2023-01-09 09:23:20', 'Pendiente', 31);
 
 -- --------------------------------------------------------
 
@@ -223,6 +229,15 @@ CREATE TABLE `password_reset_temp` (
   `key` varchar(250) NOT NULL,
   `expDate` datetime NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+--
+-- Volcado de datos para la tabla `password_reset_temp`
+--
+
+INSERT INTO `password_reset_temp` (`id`, `email`, `key`, `expDate`) VALUES
+(6, 'jalegalarza@gmail.com', '59500f3f171d63abcb7a9e1c974dbdc43e96ccce6e', '2023-01-03 04:01:06'),
+(7, 'jalegalarza@gmail.com', '59500f3f171d63abcb7a9e1c974dbdc47c748bd9ca', '2023-01-08 04:03:20'),
+(8, 'jalegalarza@gmail.com', '59500f3f171d63abcb7a9e1c974dbdc4cbfccc3035', '2023-01-08 04:04:53');
 
 -- --------------------------------------------------------
 
@@ -280,21 +295,24 @@ CREATE TABLE `user` (
   `correo` varchar(50) NOT NULL,
   `password` varchar(300) NOT NULL,
   `fecha` timestamp NOT NULL DEFAULT current_timestamp(),
-  `rol` int(11) NOT NULL
+  `rol` int(11) NOT NULL,
+  `status` int(11) NOT NULL DEFAULT 1
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 --
 -- Volcado de datos para la tabla `user`
 --
 
-INSERT INTO `user` (`id`, `nombre`, `correo`, `password`, `fecha`, `rol`) VALUES
-(11, 'Emanuel', 'mugarte5672@gmail.com', '12345', '2022-08-27 16:43:19', 1),
-(12, 'user', 'usuario@gmail.com', '12345', '2022-08-27 16:43:37', 2),
-(13, 'Administrador', 'admin@softcodepm.com', '12345', '2022-08-29 14:22:36', 1),
-(15, 'Alejandro', 'jalegalarza@gmail.com', '$2y$05$PrDlX8cPuoC.Yp2SIJEbSOkZqr82GWjPBWPSvUIKIfQwpxhX/PkU6', '2022-12-23 19:01:58', 1),
-(17, 'Prueba', 'prueba@gmail.com', '12345', '2022-12-24 05:40:52', 3),
-(18, 'Ejemplo', 'example@gmail.mx', '12345', '2022-12-24 15:12:39', 3),
-(19, 'Alejandro2312', 'jabona3158@letpays.com', '$2y$05$LtLtkrYP2686T/ONrYNXEuPQ9pItG6A1gzGiFSFfwfsXGa5nlOvKe', '2023-01-06 03:57:57', 3);
+INSERT INTO `user` (`id`, `nombre`, `correo`, `password`, `fecha`, `rol`, `status`) VALUES
+(11, 'Emanuel', 'mugarte5672@gmail.com', '12345', '2022-08-27 16:43:19', 1, 1),
+(12, 'user', 'usuario@gmail.com', '12345', '2022-08-27 16:43:37', 2, 1),
+(13, 'Administrador', 'admin@softcodepm.com', '12345', '2022-08-29 14:22:36', 1, 1),
+(15, 'Alejandro', 'jalegalarza@gmail.com', '$2y$05$PrDlX8cPuoC.Yp2SIJEbSOkZqr82GWjPBWPSvUIKIfQwpxhX/PkU6', '2022-12-23 19:01:58', 1, 1),
+(17, 'Prueba', 'prueba@gmail.com', '12345', '2022-12-24 05:40:52', 3, 1),
+(18, 'Ejemplo', 'example@gmail.mx', '12345', '2022-12-24 15:12:39', 3, 1),
+(19, 'Alejandro2312', 'jabona3158@letpays.com', '$2y$05$LtLtkrYP2686T/ONrYNXEuPQ9pItG6A1gzGiFSFfwfsXGa5nlOvKe', '2023-01-06 03:57:57', 3, 1),
+(30, 'Alejandro', 'pruebas@outlook.co.nz', '$2y$05$QqPd33VKbP665n0kvC13ke1mv4/L81UbxG0lfgAd6GARl9jyViWiG', '2023-01-07 08:13:17', 3, 1),
+(31, 'Alejandro23', '00314412@red.unid.mx', '$2y$05$QCsTBWv16y.inH5Rt81FdOCSnWR8lgzuDFt9rSdUgmv6CYDtCQiYC', '2023-01-09 09:01:11', 3, 3);
 
 --
 -- Índices para tablas volcadas
@@ -367,6 +385,7 @@ ALTER TABLE `roles`
 ALTER TABLE `user`
   ADD PRIMARY KEY (`id`),
   ADD UNIQUE KEY `correo` (`correo`),
+  ADD UNIQUE KEY `correo_2` (`correo`),
   ADD KEY `permisos` (`rol`);
 
 --
@@ -377,7 +396,7 @@ ALTER TABLE `user`
 -- AUTO_INCREMENT de la tabla `citas`
 --
 ALTER TABLE `citas`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=29;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=33;
 
 --
 -- AUTO_INCREMENT de la tabla `doctor`
@@ -413,13 +432,13 @@ ALTER TABLE `medicamentos`
 -- AUTO_INCREMENT de la tabla `pacientes`
 --
 ALTER TABLE `pacientes`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=22;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=24;
 
 --
 -- AUTO_INCREMENT de la tabla `password_reset_temp`
 --
 ALTER TABLE `password_reset_temp`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=9;
 
 --
 -- AUTO_INCREMENT de la tabla `recetas`
@@ -437,7 +456,7 @@ ALTER TABLE `roles`
 -- AUTO_INCREMENT de la tabla `user`
 --
 ALTER TABLE `user`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=20;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=32;
 
 --
 -- Restricciones para tablas volcadas
