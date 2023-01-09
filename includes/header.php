@@ -55,7 +55,18 @@ die();
                 
                 <div class="sidebar-brand-text mx-1">Medicina</div>
             </a>
+            <style>
+        .bg-gradient-dark {
+    background-color: #002514 ;
+    background-image: linear-gradient(180deg,#002514   10%, #1a2c23  100%);
+    background-size: cover;
+}
+/*.bg-white {
+    background-color: #8d58ca!important;
+}
+    */
 
+    </style>
             <!-- Divider -->
             <hr class="sidebar-divider my-0">
 

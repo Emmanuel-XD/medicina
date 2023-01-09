@@ -26,17 +26,19 @@ if (isset($_GET["key"]) && isset($_GET["email"]) && isset($_GET["action"]) && ($
   $sql = "SELECT * FROM `password_reset_temp` WHERE `key`='".$key."' and `email`='".$email."';";
   $query = mysqli_query($conexion,$sql);
   $row = mysqli_num_rows($query);
-  if ($row==""){
-  $error .= '<h2>Invalid Link</h2>
-<p>The link is invalid/expired. Either you did not copy the correct link
-from the email, or you have already used the key in which case it is 
-deactivated.</p>
+  if($row==""){
+  $error .= '<h2>Enlace no válido</h2>
+<p>El enlace no es válido/caducó. O no copiaste el enlace correcto
+del correo electrónico, o ya ha utilizado la clave, en cuyo caso es
+desactivado</p>
 <p><a href="https://www.allphptricks.com/forgot-password/index.php">
-Click here</a> to reset password.</p>';
+haga clic aquí</a> para restablecer la contraseña.</p>';
 	}else{
   $row = mysqli_fetch_assoc($query);
   $expDate = $row['expDate'];
+
   if ($expDate >= $curDate){
+ 
   ?>
   
 <div class="formreset container h-100">
@@ -70,8 +72,8 @@ Click here</a> to reset password.</p>';
 <?php
 }else{
 $error .= "<h2>Link Expired</h2>
-<p>The link is expired. You are trying to use the expired link which 
-as valid only 24 hours (1 days after request).<br /><br /></p>";
+<p>El enlace está caducado. Está intentando utilizar el enlace caducado que
+es válido solo 24 horas (1 día después de la solicitud).<br /><br /></p>";
             }
       }
 if($error!=""){
@@ -87,7 +89,7 @@ $pass2 = mysqli_real_escape_string($conexion,$_POST["pass2"]);
 $email = $_POST["email"];
 $curDate = date("Y-m-d H:i:s");
 if ($pass1!=$pass2){
-$error.= "<p>Password do not match, both password should be same.<br /><br /></p>";
+$error.= "<p>La contraseña no coincide, ambas contraseñas deben ser iguales.<br /><br /></p>";
   }
   if($error!=""){
 echo "<div class='error'>".$error."</div><br />";
@@ -99,8 +101,8 @@ mysqli_query($conexion,
 
 mysqli_query($conexion,"DELETE FROM `password_reset_temp` WHERE `email`='".$email."';");
 	
-echo '<div class="error"><p>Congratulations! Your password has been updated successfully.</p>
-<p><a href="https://www.allphptricks.com/forgot-password/login.php">
+echo '<div class="error"><p>¡Felicidades! Su contraseña se ha actualizado correctamente.</p>
+<p><a href="localhost/medicina/">
 Click here</a> to Login.</p></div><br />';
 	  }		
 }
