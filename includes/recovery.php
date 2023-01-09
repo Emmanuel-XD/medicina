@@ -20,23 +20,12 @@
 <nav class="navbar navbar-expand-lg navbar-dark bg-success fixed-top" id="mainNav">
             <div class="container px-4">
                 <img src="../img/imss.png" class="log" width="50px" height="50px" alt="">
-                <a class="navbar-brand" href="#page-top"> IMSS-BIENESTAR</a>
+                <a class="navbar-brand" href="../index.php"> IMSS-BIENESTAR</a>
                 <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarResponsive" aria-controls="navbarResponsive" aria-expanded="false" aria-label="Toggle navigation"><span class="navbar-toggler-icon"></span></button>
                 <div class="collapse navbar-collapse" id="navbarResponsive">
                     <ul class="navbar-nav ms-auto">
-                        <li class="nav-item"><a class="nav-link" href="#about">Home</a></li>
+                        <li class="nav-item"><a class="nav-link" href="../index.php">Home</a></li>
 
-
-
-                        <li class="nav-item dropdown">
-                            <a class="nav-link dropdown-toggle" href="#acceso" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-                                Acceso
-                            </a>
-                            <ul class="dropdown-menu">
-                                <li><a class="dropdown-item" data-toggle="modal" data-target="#user">Administración</a></li>
-                                <li><a class="dropdown-item " data-toggle="modal" data-target="#login">Usuario</a></li>
-                            </ul>
-                        </li>
 
 
                     </ul>
@@ -64,5 +53,8 @@
              </div>
         </div> 
 </body>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js"></script>
+        <!-- Core theme JS-->
+        <script src="./js/scripts.js"></script>
 <script src="../js/recover.js"></script>
 </html>

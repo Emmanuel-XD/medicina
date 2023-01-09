@@ -10,6 +10,16 @@ $(document).ready(function () {
     if(document.getElementById('notAllow')){
         title = "No tienes permisos para acceder aqui"
     }
+    if(document.getElementById('notAllow1')){
+        title = "Este usuario esta deshabilitado"
+    }
+    if(document.getElementById('notAllow2')){
+        title = "Aun no has completado el registro"
+        url = "../home/paciente.php"
+    }
+    if(document.getElementById('notAllow3')){
+        title = "No tienes permisos para acceder aqui"
+    }
     swal({
         title: title,   
         text: displayText.replace(/#1/, closeInSeconds),   

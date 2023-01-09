@@ -1,5 +1,10 @@
 <?php
+session_start();
+if($_SESSION["status"]){
 
+    header('location: ../includes/statusValidator.php');
+
+}
 
 ?>
 <!-- CSS only -->
@@ -99,6 +104,13 @@
                         Swal.fire({
                             'title': 'Error',
                             'text': 'No se creo el usuario',
+                            'icon': 'error'
+                        })
+                    }
+                    if(r === 'mail'){
+                        Swal.fire({
+                            'title': 'Error',
+                            'text': 'Este correo ya esta registrado prueba otro o inicia sesión',
                             'icon': 'error'
                         })
                     }

@@ -113,21 +113,25 @@ function acceso_user()
     $user_data = [
         'rol' => $filas['rol'],
         'password' => $filas['password'],
-        'nombre' => $filas['nombre']
+        'nombre' => $filas['nombre'],
+        'status' => $filas['status']
     ];
 
     if ($user_data['rol']) {
         if ($user_data['rol'] == 1 && password_verify($password, $user_data['password'])) {
             session_start();
+
             $_SESSION['nombre'] = $user_data['nombre'];
             $_SESSION['correo'] = $correo;
             $_SESSION['rol'] = $filas['rol'];
+            $_SESSION ['status'] = $user_data['status'];
             echo json_encode("login_success");
         }
         if ($user_data['rol'] == 2 && password_verify($password, $filas['password'])) { //doctor
             session_start();
             $_SESSION['nombre'] = $user_data['nombre'];
             $_SESSION['correo'] = $correo;
+            $_SESSION ['status'] = $user_data['status'];
             $_SESSION['rol'] = $filas['rol'];
             echo json_encode("login_success");
         }
@@ -165,7 +169,8 @@ function acceso_paciente()
     $user_data = [
         'rol' => $filas['rol'],
         'password' => $filas['password'],
-        'nombre' => $filas['nombre']
+        'nombre' => $filas['nombre'],
+        'status' => $filas['status'],
     ];
     if ($user_data['rol']) {
         if ($filas['rol'] == 3 && password_verify($password, $user_data['password'])) {
@@ -173,6 +178,7 @@ function acceso_paciente()
             $_SESSION['correo'] = $correo;
             $_SESSION['nombre'] = $user_data['nombre'];
             $_SESSION['rol'] = $filas['rol'];
+            $_SESSION ['status'] = $user_data['status'];
             $_SESSION['id'] = $filas['id'];
             echo json_encode("login_success");
         }
@@ -265,6 +271,7 @@ function insertar_paciente()
 {
     include "db.php";
     extract($_POST);
+ 
     $consulta = "INSERT INTO pacientes (nombre, apellidos, correo, edad , ocupacion,  sexo, estado_civil,
     peso, nacimiento, familiar, telefono, direccion, enfermedad, tipo_sangre, alergias, curp, estado)
       VALUES ('$nombre', '$apellidos', '$correo', '$edad', '$ocupacion',  '$sexo',  '$estado_civil'
@@ -290,15 +297,21 @@ function insertar_paciente2()
     include "db.php";
     extract($_POST);
     session_start();
+    $correoses = $_SESSION['correo'];
     $id = $_SESSION['id'];
     $consulta = "INSERT INTO pacientes (nombre, apellidos, correo, edad , ocupacion,  sexo, estado_civil,
     peso, nacimiento, familiar, telefono, direccion, enfermedad, tipo_sangre, alergias, curp, estado, id_user)
-      VALUES ('$nombre', '$apellidos', '$correo', '$edad', '$ocupacion',  '$sexo',  '$estado_civil'
+      VALUES ('$nombre', '$apellidos', '$correoses', '$edad', '$ocupacion',  '$sexo',  '$estado_civil'
       ,  '$peso',  '$nacimiento',  '$familiar',  '$telefono',  '$direccion',  '$enfermedad',  '$tipo_sangre',  
       '$alergias',  '$curp',  '$estado', $id)";
     $resultado = mysqli_query($conexion, $consulta);
 
     if ($resultado) {
+        $sql = "UPDATE user SET status = '3'  WHERE  id = '$id'";
+        $resultado = mysqli_query($conexion, $sql);
+        if($resultado){
+            $_SESSION['status'] = '3';
+        }
         echo "<script language='JavaScript'>
         alert('El registro fue guardado correctamente');
         location.assign('../home/agendar.php');

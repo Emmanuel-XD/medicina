@@ -24,7 +24,6 @@ if($rows > 0){
     $addKey = substr(md5(uniqid(rand(),1)),3,10);
     $key = $key . $addKey;
     mysqli_query($conexion, "INSERT INTO `password_reset_temp` (`email`, `key`, `expDate`) VALUES ('".$email."', '".$key."', '".$expDate."');");
-        
         $output='<p>Buen dia estimado/a: '.$data['nombre'].'</p>';
         $output.='<p>Este correo es para restablecer tú contraseña.</p>';
         $output.='<p>-------------------------------------------------------------</p>';
@@ -58,7 +57,7 @@ if($rows > 0){
         $mail->send();
         echo json_encode('success');
     } catch (Exception $e) {
-        echo json_encode("send_error");
+        echo json_encode("server_error");
     }
 }
 else{
