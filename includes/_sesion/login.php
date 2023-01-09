@@ -34,6 +34,7 @@ if ($varsesion == null || $varsesion = '') {
                         <div class="form-group">
                             <label for="password">Contraseña:</label><br>
                             <input type="password" name="password" id="passwordAdmin" class="logininp form-control" required>
+                            <a href="includes/recovery.php">¿Olvido su contraseña?</a>
                         </div>
                         <br>
 
@@ -46,13 +47,10 @@ if ($varsesion == null || $varsesion = '') {
                             </center>
 
                         </div>
+
+
+                    </form>
                 </div>
             </div>
-
-            </form>
         </div>
     </div>
-    </div>
-    </div>
-    </div>
-    </form>
