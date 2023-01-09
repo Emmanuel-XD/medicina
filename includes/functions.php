@@ -229,11 +229,17 @@ function insertar_cita2()
 {
     include "db.php";
     extract($_POST);
+    $id = $_SESSION['id'];
     $consulta = "INSERT INTO citas (fecha, hora, id_paciente, id_doctor ,   estado)
       VALUES ('$fecha', '$hora', '$id_paciente', '$id_doctor',  '$estado')";
     $resultado = mysqli_query($conexion, $consulta);
 
     if ($resultado) {
+        $sql = "UPDATE user SET status = '0'  WHERE  id = '$id'";
+        $resultado = mysqli_query($conexion, $sql);
+        if($resultado){
+            $_SESSION['status'] = '0';
+        }
         echo "<script language='JavaScript'>
         alert('El registro fue guardado correctamente');
         location.assign('../home/fondo.php');

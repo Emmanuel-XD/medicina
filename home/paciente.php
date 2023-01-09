@@ -1,6 +1,15 @@
 <?php
-session_start()
-
+session_start();
+echo $_SESSION['status'];
+if(!$_SESSION['status']){
+    header('location: ../index.php');
+}
+if($_SESSION['status']){
+    if($_SESSION['status'] === '1' || $_SESSION['status'] === '3' || $_SESSION['status'] === '4' || $_SESSION['status'] === '5' || $_SESSION['status'] === '0'){
+        header('location: ../includes/statusValidator.php');
+        die();
+    }
+}
 ?>
 <!DOCTYPE html>
 <html lang="en">

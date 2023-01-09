@@ -114,6 +114,13 @@ if($_SESSION["status"]){
                             'icon': 'error'
                         })
                     }
+                    if(r === 'pass'){
+                        Swal.fire({
+                            'title': 'Error',
+                            'text': 'Las contraseñas no coinciden',
+                            'icon': 'error'
+                        })
+                    }
 
 
             } 

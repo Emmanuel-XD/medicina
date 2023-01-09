@@ -7,6 +7,7 @@ var
    
 
 $(document).ready(function () {
+    
     if(document.getElementById('notAllow')){
         title = "No tienes permisos para acceder aqui"
     }
@@ -19,6 +20,11 @@ $(document).ready(function () {
     }
     if(document.getElementById('notAllow3')){
         title = "No tienes permisos para acceder aqui"
+        url = "../home/agendar.php"
+    }
+    if(document.getElementById('regcomplete')){
+        title = "No puedes acceder aqui ya has completado el registro"
+        url = "../views/index.php"
     }
     swal({
         title: title,   

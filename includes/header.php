@@ -11,7 +11,6 @@ if($actualsesion == null || $actualsesion == ''  && $typeUser == null || $typeUs
 <?php
 die();
 }
-include '../includes/statusValidator.php'
 ?>
 
  

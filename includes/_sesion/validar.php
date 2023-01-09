@@ -20,15 +20,15 @@
 		$validmail =mysqli_query($conexion, $sql);
 		$rows = mysqli_num_rows($validmail);
 		if($rows >= 1){
-			echo json_encode('error');
+			echo json_encode('mail');
 			die();
 		}
 			if(strcmp($password, $password2) !== 0)
         {
-            echo json_encode('error');
+            echo json_encode('pass');
 
         }else{
-			$password = password_hash($password, PASSWORD_DEFAULT, ['cost' => 5]);
+		$password = password_hash($password, PASSWORD_DEFAULT, ['cost' => 5]);
 		$consulta = "INSERT INTO user (nombre, correo,  password, rol, status)
 			VALUES ('$nombre', '$correo', '$password', '$rol', '2')";
 		$resultado=mysqli_query($conexion, $consulta);

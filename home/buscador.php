@@ -1,11 +1,13 @@
 <?php
-
+ini_set('display_errors', 1);
+ini_set('display_startup_errors', 1);
+error_reporting(E_ALL);
 include "../includes/db.php";
 if (isset($_POST['buscar'])) {
-
+    $correo = $_POST["buscar"];
     $buscador = mysqli_query($conexion, "SELECT ct.id, ct.fecha, ct.hora, ct.estado, ct.fecha_registro, 
 p.nombre, d.name, est.estado FROM citas ct INNER JOIN pacientes p ON ct.id_paciente = p.id 
-INNER JOIN doctor d ON ct.id_doctor = d.id LEFT JOIN estado est ON ct.estado = est.id WHERE nombre LIKE LOWER('%" . $_POST["buscar"] . "%') ");
+INNER JOIN doctor d ON ct.id_doctor = d.id LEFT JOIN estado est ON ct.estado = est.id WHERE p.correo LIKE  '$correo'");
     $numero = mysqli_num_rows($buscador);
 }
 ?>

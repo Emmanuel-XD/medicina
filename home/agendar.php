@@ -1,21 +1,26 @@
 <?php
-session_start()
+session_start();
+if(!$_SESSION['status']){
+    header('location: ../index.php');
+}
+if($_SESSION['status']){
+    if($_SESSION['status'] === '1' || $_SESSION['status'] === '2' || $_SESSION['status'] === '4' || $_SESSION['status'] === '5' || $_SESSION['status'] === '0'){
+        header('location: ../includes/statusValidator.php');
+        die();
+    }
+}
 
 ?>
 <!DOCTYPE html>
 <html lang="en">
-
 <head>
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Registro | Cita</title>
-
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-rbsA2VBKQhggwzxH7pPCaAqO46MgnOM80zW1RWuH61DGLwZJEdK2Kadq2F9CUG65" crossorigin="anonymous">
 </head>
-
 <body>
-
     <form action="../includes/functions.php" method="POST">
         <br>
         <br>
@@ -46,7 +51,8 @@ session_start()
 
                             include("../includes/db.php");
                             //Codigo para mostrar categorias desde otra tabla
-                            $sql = "SELECT * FROM pacientes ";
+                            $correo = $_SESSION['correo'];
+                            $sql = "SELECT * FROM pacientes where correo = '$correo'";
                             $resultado = mysqli_query($conexion, $sql);
                             while ($consulta = mysqli_fetch_array($resultado)) {
                                 echo '<option value="' . $consulta['id'] . '">' . $consulta['nombre'] . '</option>';
@@ -71,7 +77,6 @@ session_start()
                             while ($consulta = mysqli_fetch_array($resultado)) {
                                 echo '<option value="' . $consulta['id'] . '">' . $consulta['name'] . '</option>';
                             }
-
                             ?>
 
                         </select>

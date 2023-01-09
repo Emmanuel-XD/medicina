@@ -34,7 +34,7 @@ if ($actualsesion == null || $actualsesion == '') {
             realizados dentro del sistema en caso de algun cambio. </p>
 
 
-                    <div data-id="<?php echo $_SESSION['nombre']?>" id="datos" ></div>
+                    <div data-id="<?php echo $_SESSION['correo']?>" id="datos" ></div>
    
         </div>
 </body>
