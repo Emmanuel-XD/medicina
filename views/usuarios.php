@@ -61,7 +61,6 @@ if($actualsesion == null || $actualsesion == ''){
                                         <tr>
                                             <th>Nombre</th>
                                             <th>Correo</th>
-                                            <th>Contraseña</th>
                                             <th>Fecha</th>
                                             <th>Rol</th>
                                             <th>Acciones</th>
@@ -80,7 +79,6 @@ while ($fila = mysqli_fetch_assoc($result)):
 <tr>
 <td><?php echo $fila['nombre']; ?></td>
 <td><?php echo $fila['correo']; ?></td>
-<td><?php echo $fila['password']; ?></td>
 <td><?php echo $fila['fecha']; ?></td>
 <td><?php echo $fila['rol']; ?></td>
 
