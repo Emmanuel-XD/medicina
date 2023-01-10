@@ -2,7 +2,7 @@
 // Seguridad de sesiones
 session_start();
 $typeUser = $_SESSION['rol'];
-if($typeUser === '2' || $typeUser ==='1'){
+if( $typeUser ==='1'){
 
 error_reporting(0);
 $varsesion = $_SESSION['nombre'];

@@ -3,6 +3,7 @@ error_reporting(0);
 session_start();
 $actualsesion = $_SESSION['nombre'];
 $typeUser = $_SESSION['rol'];
+$status = $_SESSION['status'];
 if($actualsesion == null || $actualsesion == ''  && $typeUser == null || $typeUser == '' ){
 ?>
 <script src="https://code.jquery.com/jquery-3.6.3.min.js"></script>
@@ -10,6 +11,10 @@ if($actualsesion == null || $actualsesion == ''  && $typeUser == null || $typeUs
 <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
 <?php
 die();
+}
+if($status != 0){
+
+    header( 'location: ../includes/statusValidator.php');
 }
 ?>
 
@@ -138,7 +143,7 @@ die();
                 <div id="collapsePages" class="collapse" aria-labelledby="headingPages" data-parent="#accordionSidebar">
                     <div class="bg-white py-2 collapse-inner rounded">
                         <h6 class="collapse-header">Ver Medicos:</h6>
-                        <a class="collapse-item" href="../views/medicos.php">Mostrar</a>
+                        <?php if( $typeUser ==='1'){  ?>       <a class="collapse-item" href="../views/medicos.php">Mostrar</a><?php  } ?>
                         <a class="collapse-item" href="../views/medicamentos.php">Medicamentos</a>
                         <a class="collapse-item" href="../views/recetas.php">Recetas</a>
                     </div>
@@ -146,6 +151,7 @@ die();
             </li>
 
             <!-- Nav Item - Charts -->
+            <?php if( $typeUser ==='1'){  ?>
             <li class="nav-item">
                 <a class="nav-link" href="../views/especialidades.php">
                 <i class="fa fa-medkit" aria-hidden="true"></i>
@@ -166,6 +172,7 @@ die();
                 <i class="fa fa-user" aria-hidden="true"></i>
                     <span>Usuarios</span></a>
             </li>
+            <?php } ?>
             <!-- Nav Item - infor -->
             <li class="nav-item">
                 <a class="nav-link" href="../views/acerca.php">
@@ -241,8 +248,8 @@ die();
                                 </form>
                             </div>
                         </li>
-                        <li>
-                            <p>INICIO</p>
+                        <li class="nav-item dropdown no-arrow">
+                            <a class="mr-2 text-gray-800 medium nav-link" href="../views/index.php"><b>INICIO</b></a>
                         </li>
                         <div class="topbar-divider d-none d-sm-block"></div>
 

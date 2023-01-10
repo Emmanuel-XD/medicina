@@ -15,7 +15,7 @@
                 </div>
                             <div class="form-group">
                             <label for="correo" class="form-label">Correo *</label>
-                            <input type="text"  id="correoUser" name="correo" class="logininp form-control" required>
+                            <input type="email"  id="correoUser" name="correo" class="logininp form-control" required>
                             </div>
 
                             <br>

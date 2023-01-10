@@ -54,9 +54,12 @@ $usuario = mysqli_fetch_assoc($resultado);
                                 <label for="username">Correo:</label><br>
                                 <input type="email" name="correo" id="correo" class="form-control" placeholder="No se puede repetir con alguno de la lista..." value="<?php echo $usuario ['correo']; ?>">
                             </div>
+                            <?php 
+                                $passrand = rand(1000, 9999);
+                            ?>
                             <div class="form-group">
-                                <label for="password">Contraseña:</label><br>
-                                <input type="password" name="password" id="password" class="form-control" value="<?php echo $usuario ['password']; ?>">
+                                <label for="password">Contraseña: (para actualizar datos es necesario generar nueva contraseña,Escribe una o la contraseña por defecto es: <i><b>Defaultpass<?php echo $passrand; ?> </b> </i>)</label><br>
+                                <input type="password" name="password" id="password" class="form-control" value="Defaultpass<?php echo $passrand; ?>">
                             </div>
                       
                             <div class="form-group">
@@ -69,7 +72,16 @@ $usuario = mysqli_fetch_assoc($resultado);
                                 <input type="hidden" name="id" value="<?php echo $id;?>">
                                </select>
                             </div>
-                           
+                            <div class="form-group">
+                                  <label for="rol" class="form-label"> Nivel de registro:</label>
+                                  <select name="status" id="status" class="form-control" required>
+                                  <option value="">--Selecciona una opcion--</option>
+                                  <option <?php if($usuario['status'] == '0'){?>selected<?php }?>  value="0">Habilitado (Registro completo)</option>
+                                  <option <?php if($usuario['status'] == '1'){?>selected<?php }?>  value="1">Deshabilitado (No podra ingresar)</option>
+                                  <option <?php if($usuario['status'] == '2'){?>selected<?php }?>  value="2">Pedir datos usuario</option>
+                                  <option <?php if($usuario['status'] == '3'){?>selected<?php }?>  value="3">Pedir agendar primera cita</option>
+                               </select>
+                            </div>
                                <br>
                                 <div class="mb-3">
                                     

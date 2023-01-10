@@ -19,7 +19,7 @@ INNER JOIN doctor d ON ct.id_doctor = d.id LEFT JOIN estado est ON ct.estado = e
             <thead>
                 <tr>
                     <th>NumCita#</th>
-                    <th>Fecha_Cita</th>
+                    <th>Fecha de mis citas</th>
                     <th>Horario</th>
                     <th>Paciente</th>
                     <th>Doctor</th>

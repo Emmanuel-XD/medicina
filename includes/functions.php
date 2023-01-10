@@ -148,6 +148,9 @@ function acceso_user()
         echo json_encode("session_error");
     }
 }
+else{
+    echo json_encode("session_error");
+}
 }
 
 function acceso_paciente()
@@ -201,6 +204,9 @@ function acceso_paciente()
     }
     
 }
+else{
+    echo json_encode("session_error");
+}
 }
 
 function insertar_cita()
@@ -227,6 +233,7 @@ function insertar_cita()
 
 function insertar_cita2()
 {
+    session_start();
     include "db.php";
     extract($_POST);
     $id = $_SESSION['id'];
@@ -420,8 +427,10 @@ function editar_user()
 {
     include "db.php";
     extract($_POST);
+    $password = trim($_POST['password']);
+    $password = password_hash($password, PASSWORD_DEFAULT, ['cost' => 5]);
     $consulta = "UPDATE user SET nombre = '$nombre', correo = '$correo', password = '$password',
-     rol ='$rol' WHERE id = '$id' ";
+     rol ='$rol' , status = '$status' WHERE id = '$id' ";
     $resultado = mysqli_query($conexion, $consulta);
 
     if ($resultado) {

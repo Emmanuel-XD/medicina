@@ -1,6 +1,8 @@
 <?php 
 error_reporting(0);
 session_start();
+$typeUser = $_SESSION['rol'];
+if($typeUser ==='1'){
 $actualsesion = $_SESSION['nombre'];
 
 if($actualsesion == null || $actualsesion == ''){
@@ -61,8 +63,9 @@ if($actualsesion == null || $actualsesion == ''){
                                         <tr>
                                             <th>Nombre</th>
                                             <th>Correo</th>
-                                            <th>Fecha</th>
+                                            <th>Fecha de creación</th>
                                             <th>Rol</th>
+                                            <th>Status</th>
                                             <th>Acciones</th>
                                         </tr>
                                     </thead>
@@ -70,17 +73,30 @@ if($actualsesion == null || $actualsesion == ''){
 				<?php
 
 include "../includes/db.php";              
-$result=mysqli_query($conexion,"SELECT  user.id, user.nombre, user.correo, user.password, user.fecha,
+$result=mysqli_query($conexion,"SELECT  user.id, user.nombre, user.correo, user.fecha, user.status,
 roles.rol FROM user 
 LEFT JOIN roles ON user.rol= roles.id ");
 while ($fila = mysqli_fetch_assoc($result)):
-    
+    if($fila['status'] == 0){
+        $status = 'Habilitado';
+    }
+    if($fila['status'] == 1){
+        $status = 'Deshabilitado';
+    }
+    if($fila['status'] == 2){
+        $status = 'Registro pendiente';
+    }
+    if($fila['status'] == 3){
+        $status = 'Generar cita pendiente';
+    }
+
 ?>
 <tr>
 <td><?php echo $fila['nombre']; ?></td>
 <td><?php echo $fila['correo']; ?></td>
 <td><?php echo $fila['fecha']; ?></td>
 <td><?php echo $fila['rol']; ?></td>
+<td><?php echo $status ?></td>
 
 <td>
 <a class="btn btn-warning" href="../includes/editar_user.php?id=<?php echo $fila['id']?> ">
@@ -162,3 +178,11 @@ Swal.fire({
 </body>
 
 </html>
+<?php }
+else {
+?>
+<div id="notAllow" ></div>
+<script src="https://code.jquery.com/jquery-3.6.3.min.js"></script>
+<script  src="../js/not-allowed.js"></script>
+<script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script><?php
+}?>

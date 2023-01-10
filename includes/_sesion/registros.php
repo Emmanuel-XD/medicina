@@ -54,6 +54,16 @@
                                   <option value="3">Paciente</option>
                                </select>
                             </div>
+                            <div class="form-group">
+                                  <label for="rol" class="form-label"> Nivel de registro:</label>
+                                  <select name="status" id="status" class="form-control" required>
+                                  <option value="">--Selecciona una opcion--</option>
+                                  <option value="0">Habilitado (Registro completo)</option>
+                                  <option value="1">Deshabilitado (No podra ingresar)</option>
+                                  <option value="2">Pedir datos usuario</option>
+                                  <option value="3">Pedir agendar primera cita</option>
+                               </select>
+                            </div>
                       <br>
 
                                 <div class="mb-3">
@@ -81,58 +91,62 @@
 
 <script type="text/javascript">
 	$(function(){
-		$('#register').click(function(e){
+        $('#register').click(function(e) {
+            e.preventDefault();
+            var valid = this.form.checkValidity();
 
-			var valid = this.form.checkValidity();
+            if (valid) {
+                var datos = new FormData();
+                datos.append('nombre', $('#nombre').val())
+                datos.append('correo', $('#correo').val())
+                datos.append('password', $('#password').val())
+                datos.append('password2', $('#password2').val())
+                datos.append('rol', $('#rol').val())
+                datos.append('status', $('#status').val())
 
-			if(valid){
+                fetch('../includes/_sesion/validar.php',{
+                    method: 'POST',
+                    body: datos,
+                }).then((response) => response.json()).then((response => {confirmation (response); }))
+
+}});
+
+    function confirmation(r){
+        if(r === 'success'){
+                        Swal.fire({
+                            'title': '¡Mensaje!',
+                            'text': 'usuario creado',
+                            'icon': 'success',
+                            'showConfirmButton': 'false',
+                            'timer': '1500'
+                        }).then(function() {
+                            window.location = "usuarios.php";
+                        });
+                    }
+                        if(r === 'error'){
+                        Swal.fire({
+                            'title': 'Error',
+                            'text': 'No se creo el usuario',
+                            'icon': 'error'
+                        })
+                    }
+                    if(r === 'mail'){
+                        Swal.fire({
+                            'title': 'Error',
+                            'text': 'Este correo ya esta registrado prueba otro o inicia sesión',
+                            'icon': 'error'
+                        })
+                    }
+                    if(r === 'pass'){
+                        Swal.fire({
+                            'title': 'Error',
+                            'text': 'Las contraseñas no coinciden',
+                            'icon': 'error'
+                        })
+                    }
 
 
-			var nombre 	= $('#nombre').val();
-			var correo 		= $('#correo').val();
-			var password 	= $('#password').val();
-			var rol	= $('#rol').val();
-			
-
-				e.preventDefault();	
-
-				$.ajax({
-					type: 'POST',
-					url: '../includes/_sesion/validar.php',
-					data: {nombre: nombre,correo: correo, password: password, rol: rol},
-					success: function(data){
-					Swal.fire({
-								'title': '¡Mensaje!',
-								'text': data,
-                                'icon': 'success',
-                                'showConfirmButton': 'false',
-                                'timer': '1500'
-								}).then(function() {
-                window.location = "usuarios.php";
-            });
-							
-					} ,
-                    
-					error: function(data){
-						Swal.fire({
-								'title': 'Error',
-								'text': data,
-								'icon': 'error'
-								})
-					}
-				});
-
-				
-			}else{
-				
-			}
-
-			
-
-
-
-		});		
-
+            } 
 		
 	});
     
