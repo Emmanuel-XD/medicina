@@ -38,15 +38,16 @@ if ($varsesion == null || $varsesion = '') {
                         <div class="row">
                             <div class="col-sm-6">
                                 <div class="mb-3">
-                                    <label for="nombre" class="form-label">Nombre</label>
-                                    <input type="text" id="nombre" name="nombre" class="form-control" required>
+                                    <label for="nombre" class="form-label">Nombres:</label>
+                                    <input type="text" id="nombre" name="nombre" autocapitalize="words" oninput="validarTexto(this, '[a-záéíóúñ ]')" class="form-control" required>
                                 </div>
                             </div>
 
+
                             <div class="col-sm-6">
                                 <div class="mb-3">
-                                    <label for="nombre" class="form-label">Apellidos</label>
-                                    <input type="text" id="apellidos" name="apellidos" class="form-control" required>
+                                    <label for="nombre" class="form-label">Apellidos:</label>
+                                    <input type="text" id="apellidos" name="apellidos" autocapitalize="words" oninput="validarTexto(this, '[a-záéíóúñ ]')" class="form-control" required>
                                 </div>
                             </div>
 
@@ -57,14 +58,14 @@ if ($varsesion == null || $varsesion = '') {
                             <div class="col-sm-6">
                                 <div class="mb-3">
                                     <label for="username">Correo:</label><br>
-                                    <input type="email" name="correo" id="correo" class="form-control" >
+                                    <input type="email" name="correo" id="correo" class="form-control">
                                 </div>
                             </div>
 
                             <div class="col-sm-6">
                                 <div class="mb-3">
                                     <label for="username">Edad</label><br>
-                                    <input type="number" name="edad" id="edad" class="form-control" >
+                                    <input type="number" name="edad" id="edad" class="form-control">
                                 </div>
                             </div>
                         </div>
@@ -73,7 +74,7 @@ if ($varsesion == null || $varsesion = '') {
                             <div class="col-sm-6">
                                 <div class="mb-3">
                                     <label for="username">Ocupacion</label><br>
-                                    <input type="text" name="ocupacion" id="ocupacion" class="form-control" >
+                                    <input type="text" name="ocupacion" id="ocupacion" class="form-control">
                                 </div>
                             </div>
 
@@ -92,15 +93,23 @@ if ($varsesion == null || $varsesion = '') {
                         <div class="row">
                             <div class="col-sm-6">
                                 <div class="mb-3">
-                                    <label for="username">Estado Civil</label><br>
-                                    <input type="text" name="estado_civil" id="estado_civil" class="form-control" >
+                                    <label for="username">Estado Civil:</label><br>
+
+                                    <select name="estado_civil" id="estado_civil" class="form-control" required>
+                                        <option value="">--Selecciona una opcion--</option>
+                                        <option value="Soltero(a)">Soltero(a)</option>
+                                        <option value="Casado(a)">Casado(a)</option>
+                                        <option value="Divorciado(a)">Divorciado(a)</option>
+                                        <option value="Union libre(a)">Union libre(a)</option>
+                                        <option value="Viudo(a)">Viudo(a)</option>
+                                    </select>
                                 </div>
                             </div>
 
                             <div class="col-sm-6">
                                 <div class="mb-3">
                                     <label for="username">Peso</label><br>
-                                    <input type="number" name="peso" id="peso" class="form-control" >
+                                    <input type="number" name="peso" id="peso" class="form-control">
                                 </div>
                             </div>
                         </div>
@@ -110,14 +119,14 @@ if ($varsesion == null || $varsesion = '') {
                             <div class="col-sm-6">
                                 <div class="mb-3">
                                     <label for="username">Fecha de Nacimiento</label><br>
-                                    <input type="date" name="nacimiento" id="nacimiento" class="form-control" >
+                                    <input type="date" name="nacimiento" id="nacimiento" class="form-control">
                                 </div>
                             </div>
 
                             <div class="col-sm-6">
                                 <div class="mb-3">
-                                    <label for="username">Familiar</label><br>
-                                    <input type="text" name="familiar" id="familiar" class="form-control">
+                                    <label for="username">Familiar Responsable</label><br>
+                                    <input type="text" name="familiar" id="familiar" autocapitalize="words" oninput="validarTexto(this, '[a-záéíóúñ ]')" class="form-control" required>
                                 </div>
                             </div>
                         </div>
@@ -125,11 +134,18 @@ if ($varsesion == null || $varsesion = '') {
                         <div class="row">
                             <div class="col-sm-6">
                                 <div class="mb-3">
-                                    <label for="telefono">Telefono:</label><br>
-                                    <input type="number" name="telefono" id="telefono" class="form-control" required>
+                                    <label for="telefono">Teléfono:</label><br>
+                                    <input type="number" name="telefono" id="telefono" oninput="minlengthNumber(this);" minlength="10" maxlength="10" class="form-control" required>
                                 </div>
                             </div>
-
+                            <script>
+                                function minlengthNumber(obj) {
+                                    console.log(obj.value);
+                                    if (obj.value.length > obj.minLength) {
+                                        obj.value = obj.value.slice(0, obj.minLength);
+                                    }
+                                }
+                            </script>
                             <div class="col-sm-6">
                                 <div class="mb-3">
                                     <label for="username">Direccion</label><br>
@@ -139,18 +155,30 @@ if ($varsesion == null || $varsesion = '') {
                         </div>
 
 
+
                         <div class="row">
                             <div class="col-sm-6">
                                 <div class="mb-3">
-                                    <label for="username">Enfermemedad</label><br>
-                                    <input type="text" name="enfermedad" id="enfermedad" class="form-control" >
+                                    <label for="username">Enfermedades</label><br>
+                                    <input type="text" name="enfermedad" id="enfermedad" autocapitalize="words" oninput="validarTexto(this, '[a-záéíóúñ ]')" class="form-control" required>
+
                                 </div>
                             </div>
 
                             <div class="col-sm-6">
                                 <div class="mb-3">
                                     <label for="username">Tipo de Sangre</label><br>
-                                    <input type="text" name="tipo_sangre" id="tipo_sangre" class="form-control">
+                                    <select name="tipo_sangre" id="tipo_sangre" class="form-control" required>
+                                        <option value="">--Selecciona una opcion--</option>
+                                        <option value="A+">A+</option>
+                                        <option value="A-">A-</option>
+                                        <option value="B+">B+</option>
+                                        <option value="B-">B-</option>
+                                        <option value="AB+">AB+</option>
+                                        <option value="AB-">AB-</option>
+                                        <option value="O+">O+</option>
+                                        <option value="O-">O-</option>
+                                    </select>
                                 </div>
                             </div>
                         </div>
@@ -167,17 +195,16 @@ if ($varsesion == null || $varsesion = '') {
                             <div class="col-sm-6">
                                 <div class="mb-3">
                                     <label for="username">Curp</label><br>
-                                    <input type="text" name="curp" id="curp" class="form-control">
+                                    <input type="text" name="curp" id="curp" minlength="18" maxlength="18" class="form-control" required>
                                 </div>
                             </div>
                         </div>
 
 
-
                         <div class="form-group">
                             <label for="pendiente" class="form-label">Estado:</label>
                             <select name="estado" id="estado" class="form-control" required>
-                            <option value="">--Selecciona una opcion--</option>
+                                <option value="">--Selecciona una opcion--</option>
                                 <option value="Pendiente">Pendiente</option>
                                 <option value="Atendido">Atendido</option>
                             </select>
@@ -203,5 +230,26 @@ if ($varsesion == null || $varsesion = '') {
 
 
 </body>
+<script>
+    $(function() {
+        $('#nacimiento').on('change', calcularEdad);
+    });
+
+    function calcularEdad() {
+
+        fecha = $(this).val();
+        var hoy = new Date();
+        var edadActual = new Date(fecha);
+        var edad = hoy.getFullYear() - edadActual.getFullYear();
+        var m = hoy.getMonth() - edadActual.getMonth();
+
+        if (m < 0 || (m === 0 && hoy.getDate() < edadActual.getDate())) {
+            edad--;
+        }
+        $('#edad').val(edad);
+    }
+</script>
+
+<script src="../js/validar.js"></script>
 
 </html>
