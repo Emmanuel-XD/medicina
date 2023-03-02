@@ -1,10 +1,10 @@
 <?php
 session_start();
-if(!$_SESSION['status']){
+if (!$_SESSION['status']) {
     header('location: ../index.php');
 }
-if($_SESSION['status']){
-    if($_SESSION['status'] === '1' || $_SESSION['status'] === '2' || $_SESSION['status'] === '4' || $_SESSION['status'] === '5' || $_SESSION['status'] === '0'){
+if ($_SESSION['status']) {
+    if ($_SESSION['status'] === '1' || $_SESSION['status'] === '2' || $_SESSION['status'] === '4' || $_SESSION['status'] === '5' || $_SESSION['status'] === '0') {
         header('location: ../includes/statusValidator.php');
         die();
     }
@@ -13,6 +13,7 @@ if($_SESSION['status']){
 ?>
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -20,6 +21,7 @@ if($_SESSION['status']){
     <title>Registro | Cita</title>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-rbsA2VBKQhggwzxH7pPCaAqO46MgnOM80zW1RWuH61DGLwZJEdK2Kadq2F9CUG65" crossorigin="anonymous">
 </head>
+
 <body>
     <form action="../includes/functions.php" method="POST">
         <br>
@@ -31,7 +33,9 @@ if($_SESSION['status']){
                     <br>
                     <p>Tu informacion debe estar registrada en nuestra base de datos. Ahora ya puedes registrar tu cita</p>
 
-                    <p><b>NOTA:</b> Nuestro horario de atencion es de 07:00 - 17:00 de lunes a viernes</p>
+                    <p><b>NOTA:</b> Nuestro horario de atencion es de 07:00 - 17:00 de lunes, martes, jueves, viernes, sabado. Solo 20 personas
+                        por dia.</p>
+                    <p><b>Dias Inhabiles:</b> Miercoles y Domingo no laboramos.</p>
                     <br>
                     <div class="form-group">
                         <label for="fecha" class="form-label">Fecha*</label>
@@ -86,7 +90,7 @@ if($_SESSION['status']){
 
 
                     <div class="form-group">
-                        <input type="hidden" name="estado" id="estado" value="1" class="form-control">
+                        <input type="hidden" name="estado" id="estado" value="2" class="form-control">
                     </div>
 
                     <input type="hidden" name="accion" value="insertar_cita2">
@@ -97,7 +101,7 @@ if($_SESSION['status']){
                     <div class="mb-3">
 
                         <input type="submit" value="Finalizar" id="register" class="btn btn-success" name="registrar">
-                        <a href="../../index.php" class="btn btn-danger">Regresar</a>
+                        <a href="../index.php" class="btn btn-danger">Regresar</a>
 
                     </div>
                 </div>
