@@ -1,0 +1,187 @@
+#calendar {
+    max-width: 600px;
+    margin: 0 auto;
+  }
+
+  .fc-event-container {
+    display: none;
+  }
+
+  .fc-event {
+    background-color: blue !important;
+  }
+
+  .fc-day-event {
+    color: gray !important;
+    background-color: lightgray !important;
+  }
+
+  .fc-day.prevday,
+  .fc-day.todays-events {
+    background-color: lightgray;
+  }
+
+  .disabled {
+    color: gray;
+    background-color: lightgray;
+    cursor: not-allowed;
+  }
+
+  .modal {
+    height: auto;
+  }
+
+  a.close-modal {
+    display: none !important;
+  }
+
+  .button {
+    width: 100%;
+    display: inline-block;
+    padding: 8px 16px;
+    font-size: 16px;
+    font-weight: bold;
+    text-align: center;
+    text-decoration: none;
+    color: #fff;
+    background-color: #4CAF50;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+
+  }
+
+  .button:hover {
+    background-color: #3e8e41;
+  }
+
+  .button:active {
+    background-color: #1e522b;
+  }
+
+  /* Estilos para el formulario */
+  #registro {
+    width: 100%;
+  }
+
+  /* Estilos para el contenedor principal */
+  .container {
+    margin-top: 50px;
+    font-family: Arial, sans-serif;
+  }
+
+  /* Estilos para el contenedor de la caja de login */
+  .login-box {
+    padding: 30px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    background-color: #fff;
+  }
+
+  /* Estilos para el título de la caja de login */
+  .login-box h3 {
+    margin-bottom: 20px;
+  }
+
+  /* Estilos para los párrafos dentro de la caja de login */
+  .login-box p {
+    margin-bottom: 10px;
+  }
+
+  /* Estilos para los enlaces dentro de la caja de login */
+  .login-box a {
+    display: inline-block;
+    margin-top: 20px;
+    color: #fff;
+    background-color: #007bff;
+    border-color: #007bff;
+    border-radius: .25rem;
+    padding: .375rem .75rem;
+  }
+
+  .login-box a:hover {
+    background-color: #0069d9;
+    border-color: #0062cc;
+  }
+
+  /* Estilos para el campo de fecha */
+  #fecha {
+    margin-top: 20px;
+    margin-bottom: 20px;
+    width: 100%;
+    padding: 10px;
+    border-radius: 5px;
+    border: 1px solid #ccc;
+  }
+
+  /* Estilos para el botón de seleccionar fecha */
+  .button {
+    display: inline-block;
+    background-color: #007bff;
+    border-color: #007bff;
+    border-radius: .25rem;
+    color: #fff;
+    padding: .375rem .75rem;
+    text-decoration: none;
+  }
+
+  .button:hover {
+    background-color: #0069d9;
+    border-color: #0062cc;
+  }
+
+  /* Estilos para el modal */
+  #calendarModal {
+    display: none;
+    background-color: #fff;
+    padding: 20px;
+    border-radius: 5px;
+    border: 1px solid #ccc;
+  }
+
+  #calendarModal #calendar {
+    margin-top: 20px;
+  }
+
+  /* Estilos para el campo de hora */
+  .form-group label {
+    display: block;
+    margin-bottom: 10px;
+  }
+
+
+  /* Estilos para los botones del formulario */
+  .btn {
+    margin-right: 10px;
+    margin-bottom: 20px;
+  }
+
+  .btn-success {
+    background-color: #28a745;
+    border-color: #28a745;
+    color: #fff;
+  }
+
+  .btn-success:hover {
+    background-color: #218838;
+    border-color: #1e7e34;
+  }
+
+  .btn-danger {
+    background-color: #dc3545;
+    border-color: #dc3545;
+    color: #fff;
+  }
+
+  .btn-danger:hover {
+    background-color: #c82333;
+    border-color: #bd2130;
+  }
+
+  select[disabled] {
+    pointer-events: none;
+    background-color: #fff;
+    color: #333;
+    opacity: 1;
+  }
+  
