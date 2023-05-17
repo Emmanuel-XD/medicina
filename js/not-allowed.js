@@ -22,6 +22,10 @@ $(document).ready(function () {
         title = "No tienes permisos para acceder aqui"
         url = "../home/agendar.php"
     }
+    if(document.getElementById('notAllowVerified')){
+        title = "usuario creado, ingresa a tu correo para verificar tu cuenta y poder continuar registrandose"
+        url = "../views/notificationVerify.php"
+    }
     if(document.getElementById('regcomplete')){
         title = "No puedes acceder aqui ya has completado el registro"
         url = "../views/index.php"
