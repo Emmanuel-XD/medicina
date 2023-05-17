@@ -12,7 +12,7 @@ if($_SESSION["status"]){
 <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-rbsA2VBKQhggwzxH7pPCaAqO46MgnOM80zW1RWuH61DGLwZJEdK2Kadq2F9CUG65" crossorigin="anonymous">
 <script src="../js/cont/jquery.min.js"></script>
   <script src="../js/cont/bootstrap.min.js"></script>
-<form action="registros.php" method="POST">
+<form id="registro" action="registros.php" method="POST">
     <br>
     <br>
     <br>
@@ -54,8 +54,8 @@ if($_SESSION["status"]){
 
                     <div class="mb-3">
                         <center>
-                            <input type="submit" value="Continuar" id="register" class="btn btn-success" name="registrar">
-                            <a href="../index.php" class="btn btn-danger">Regresar</a>
+                        <button type="button" id="register" class="btn btn-success" name="registrar">Guardar</button>
+                        <a href="../index.php" class="btn btn-danger">Regresar</a>
                         </center>
                     </div>
                 </div>
@@ -70,10 +70,21 @@ if($_SESSION["status"]){
 <script src="../package/dist/sweetalert2.all.min.js"></script>
 
 <script type="text/javascript">
+
+        $('#registro input').blur(function(){
+
+            if( $(this).val().length === 0 ) {
+
+                $(this).addClass('is-invalid');
+            }
+            else{
+                $(this).removeClass('is-invalid');
+            }
+        })
         $('#register').click(function(e) {
             e.preventDefault();
             var valid = this.form.checkValidity();
-
+            
             if (valid) {
                 var datos = new FormData();
                 datos.append('nombre', $('#nombre').val())
@@ -86,6 +97,15 @@ if($_SESSION["status"]){
                     method: 'POST',
                     body: datos,
                 }).then((response) => response.json()).then((response => {confirmation (response); }))
+
+}else{
+      var errors = 0;
+    $('#registro input').map(function(){
+    if( $(this).val().length === 0 ) {
+        $(this).addClass('is-invalid');
+        errors++
+}
+})
 
 }});
 

@@ -1,11 +1,12 @@
 <?php
 session_start();
 echo $_SESSION['status'];
-if (!$_SESSION['status']) {
+if (!$_SESSION['verified'] || !$_SESSION['status']) {
     header('location: ../index.php');
+    session_destroy();
 }
 if ($_SESSION['status']) {
-    if ($_SESSION['status'] === '1' || $_SESSION['status'] === '3' || $_SESSION['status'] === '4' || $_SESSION['status'] === '5' || $_SESSION['status'] === '0') {
+    if ($_SESSION['status'] === '1' || $_SESSION['status'] === '3' || $_SESSION['status'] === '4' || $_SESSION['status'] === '5' || $_SESSION['status'] === '0' || $_SESSION['verified'] === 'false') {
         header('location: ../includes/statusValidator.php');
         die();
     }
