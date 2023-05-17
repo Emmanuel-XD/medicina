@@ -92,9 +92,39 @@ if (isset($_POST['accion'])) {
         case 'editar_receta':
             editar_receta();
             break;
+        case 'citas':
+            citas();
+            break;    
+        case 'getNotifications':
+             getNotifications();
+            break; 
     }
 }
+function citas(){
+    include("db.php");
+    
+    $getdates = "SELECT DATE_FORMAT(`fecha`, '%Y-%m-%d') AS date, COUNT(*) AS count
+    FROM citas
+    WHERE MONTH(`fecha`) = MONTH(NOW()) AND YEAR(`fecha`) = YEAR(NOW()) AND `fecha` >= CURDATE()
+    GROUP BY date
+    HAVING count >= 20
+    ORDER BY date ASC;";
+    
 
+    
+     $resultado = mysqli_query($conexion, $getdates);
+     if (mysqli_num_rows($resultado)>0)
+     {    
+         while ($dato = mysqli_fetch_assoc($resultado) ){
+          $datos[] = $dato;
+         }
+     
+    echo json_encode($datos);
+}
+else {
+    echo json_encode('no_Dates');
+}
+}
 
 function acceso_user()
 {
@@ -174,6 +204,7 @@ function acceso_paciente()
         'password' => $filas['password'],
         'nombre' => $filas['nombre'],
         'status' => $filas['status'],
+        'verified' => $filas['verified'],
     ];
     if ($user_data['rol']) {
         if ($filas['rol'] == 3 && password_verify($password, $user_data['password'])) {
@@ -181,8 +212,14 @@ function acceso_paciente()
             $_SESSION['correo'] = $correo;
             $_SESSION['nombre'] = $user_data['nombre'];
             $_SESSION['rol'] = $filas['rol'];
-            $_SESSION ['status'] = $user_data['status'];
             $_SESSION['id'] = $filas['id'];
+            $_SESSION ['status'] = $user_data['status'];
+            if($filas['verified'] === "1"){
+                $_SESSION['verified'] = "true";
+            }
+            if($filas['verified'] === "0"){
+                $_SESSION['verified'] = "false";
+            }
             echo json_encode("login_success");
         }
         if ($user_data['rol'] == 2 && password_verify($password, $user_data['password'])) { //doctor
@@ -229,6 +266,25 @@ function insertar_cita()
          </script>";
     }
 }
+function getNotifications() {
+    include "db.php";
+    
+    // connect to the database
+
+    $resultado = mysqli_query($conexion, "SELECT ct.id, ct.fecha, ct.hora, ct.estado, ct.fecha_registro, p.nombre, 
+    d.name, est.estado FROM citas ct INNER JOIN pacientes p ON ct.id_paciente = p.id INNER JOIN doctor d ON 
+    ct.id_doctor = d.id LEFT JOIN estado est ON ct.estado = est.id ORDER BY ct.fecha_registro DESC LIMIT 5;");
+    if (mysqli_num_rows($resultado)>0)
+    {    
+        while ($dato = mysqli_fetch_assoc($resultado) ){
+         $datos[] = $dato;
+        }
+        echo json_encode($datos);
+}
+else{
+    echo json_encode('error');
+}
+}
 
 
 function insertar_cita2()
@@ -247,15 +303,9 @@ function insertar_cita2()
         if($resultado){
             $_SESSION['status'] = '0';
         }
-        echo "<script language='JavaScript'>
-        alert('El registro fue guardado correctamente');
-        location.assign('../home/fondo.php');
-        </script>";
+        echo json_encode("success");
     } else {
-        echo "<script language='JavaScript'>
-         alert('Algo salio mal. Intentalo de nuevo');
-         location.assign('../home/agendar.php');
-         </script>";
+        echo json_encode("error");
     }
 }
 
