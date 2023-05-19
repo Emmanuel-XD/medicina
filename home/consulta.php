@@ -37,7 +37,6 @@ if ($actualsesion == null || $actualsesion == '') {
                     <div data-id="<?php echo $_SESSION['correo']?>" id="datos" ></div>
    
         </div>
-
 </body>
 
 <script>

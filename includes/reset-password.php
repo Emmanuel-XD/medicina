@@ -26,7 +26,7 @@ if (isset($_GET["key"]) && isset($_GET["email"]) && isset($_GET["action"]) && ($
   $sql = "SELECT * FROM `password_reset_temp` WHERE `key`='".$key."' and `email`='".$email."';";
   $query = mysqli_query($conexion,$sql);
   $row = mysqli_num_rows($query);
-  if($row==""){
+  if($row==0){
   $error .= '<h2>Enlace no válido</h2>
 <p>El enlace no es válido/caducó. O no copiaste el enlace correcto
 del correo electrónico, o ya ha utilizado la clave, en cuyo caso es

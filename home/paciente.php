@@ -1,6 +1,5 @@
 <?php
 session_start();
-echo $_SESSION['status'];
 if (!$_SESSION['verified'] || !$_SESSION['status']) {
     header('location: ../index.php');
     session_destroy();

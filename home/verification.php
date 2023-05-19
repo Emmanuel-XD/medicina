@@ -52,7 +52,7 @@ if(isset($_GET['email']) && isset($_GET['key'])){
     if($rows_valid_user == 1){
         $error = '<h2>No es necesio verificar tu cuenta</h2>
         <p>Tu cuenta ya fue verificada previamente puedes iniciar sesión</p>
-        <p><a href="localhost/medicina/">
+        <p><a href="http://localhost/medicina/">
         haga clic aquí</a> ir a la pagina principal.</p>';
     }
     //validar que la cuenta este sin verificar y que la llave de varificacion sea valida
@@ -74,7 +74,7 @@ if(isset($_GET['email']) && isset($_GET['key'])){
             $sql_valid_user = mysqli_query($conexion, "UPDATE `user` SET `verified`= '".$status."' WHERE `correo`='".$email."';");
             ?>
             <h2>Cuenta verificada correctamente</h2>
-            <p><a id="resend" href="../index.php">click aqui</a> para redirigirte a iniciar sesion para continuar el registro</p>
+            <p><a id="resend" href="reenviar">click aqui</a> para redirigirte a iniciar sesion para continuar el registro</p>
             <?php
             
     }

@@ -11,7 +11,7 @@ INNER JOIN doctor d ON ct.id_doctor = d.id LEFT JOIN estado est ON ct.estado = e
     $numero = mysqli_num_rows($buscador);
 }
 ?>
-
+<br>
 <h5 class="card-tittle">Resultados encontrados (<?php echo $numero; ?>)</h5>
 <div class="card-body">
     <div class="table-responsive">
@@ -23,9 +23,11 @@ INNER JOIN doctor d ON ct.id_doctor = d.id LEFT JOIN estado est ON ct.estado = e
                     <th>Horario</th>
                     <th>Paciente</th>
                     <th>Doctor</th>
+
+
                     <th>Estado</th>
                     <th>Fecha_Registro</th>
-                    <th>Accion</th>
+
                 </tr>
             </thead>
             <?php while ($resultado = mysqli_fetch_assoc($buscador)) { ?>
@@ -39,7 +41,6 @@ INNER JOIN doctor d ON ct.id_doctor = d.id LEFT JOIN estado est ON ct.estado = e
                     <td><?php echo $resultado['name']; ?></td>
                     <td><?php echo $resultado['estado']; ?></td>
                     <td><?php echo $resultado['fecha_registro']; ?></td>
-                    <td><a href="nueva.php" class="btn btn-success"><i class="fa fa-plus" aria-hidden="true"></i></a></td>
 
                 </tr>
             <?php
@@ -56,5 +57,5 @@ INNER JOIN doctor d ON ct.id_doctor = d.id LEFT JOIN estado est ON ct.estado = e
 
 </div>
 <!-- /.container-fluid -->
-<?php include "form_cita.php"; ?>
+
 </div>

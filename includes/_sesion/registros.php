@@ -68,8 +68,7 @@
 
                                 <div class="mb-3">
                                     
-                               <input type="submit" value="Guardar" id="register" class="btn btn-success" 
-                               name="registrar">
+                               <button type="button" id="register" class="btn btn-success" name="registrar">Guardar</button>
                                <a href="usuarios.php" class="btn btn-danger">Cancelar</a>
                                
                             </div>
