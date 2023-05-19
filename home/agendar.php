@@ -113,7 +113,7 @@ if ($_SESSION['status']) {
 
     <div class="form-group">
       <label for="hour-select">Selecciona un horario:</label>
-      <select class="form-control" id="hour-select">
+      <select class="form-control" id="hour-select" onchange="assignInputValue()">
         <option value="">--Selecciona una opción--</option>
         <option value="07:00:00">7:00 AM</option>
         <option value="07:30:00">7:30 AM</option>

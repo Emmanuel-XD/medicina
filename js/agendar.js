@@ -1,4 +1,5 @@
 var fechatxt 
+var myHour
 $(document).ready(function() {
   document.getElementById("fecha").val
       function checkdates() {
@@ -142,7 +143,7 @@ $("#register").click(function (e) {
           var datos = new FormData();
           datos.append('accion', 'insertar_cita2')
           datos.append('fecha', fechatxt)
-          datos.append('hora', $("#hour-select").val())
+          datos.append('hora', myHour)
           datos.append('id_paciente', $('#id_paciente').val())
           datos.append('id_doctor', $('#id_doctor').val())
           datos.append('estado', '2')
@@ -195,6 +196,21 @@ $('#registro input, select').blur(function(){
       }
     }
   }
+
+  function assignInputValue() {
+    // Get the input element
+    var inputElement = document.getElementById("hour-select");
+  
+    // Get the input value
+    var inputValue = inputElement.value;
+  
+    // Assign the input value to a variable
+     myHour = inputValue;
+  
+  }
+  
+
+
   toggleSelect()
 function toggleSelect() {
   var triggerInput = document.getElementById("fecha");
