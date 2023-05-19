@@ -1,16 +1,15 @@
 <?php
-
-
 session_start();
-error_reporting(0);
-$varsesion = $_SESSION['nombre'];
-
-if ($varsesion == null || $varsesion = '') {
-    header("Location: _sesion/login.php");
+if (!$_SESSION['status']) {
+    header('location: ../index.php');
 }
-
+if ($_SESSION['status']) {
+    if ($_SESSION['status'] === '1' || $_SESSION['status'] === '2' || $_SESSION['status'] === '4' || $_SESSION['status'] === '5' || $_SESSION['status'] === '0' || $_SESSION['verified'] === 'false') {
+        header('location: ../includes/statusValidator.php');
+        die();
+    }
+}
 ?>
-
 
 <!DOCTYPE html>
 <html lang="es-MX">
@@ -24,13 +23,16 @@ if ($varsesion == null || $varsesion = '') {
     <script src="https://code.jquery.com/jquery-3.6.4.js" integrity="sha256-a9jBBRygX1Bh5lt8GZjXDzyOB+bWve9EiO7tROUtj/E=" crossorigin="anonymous"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-modal/0.9.1/jquery.modal.min.js"></script>
 
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/fullcalendar/3.10.0/fullcalendar.min.css" />
     <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.24.0/moment.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/fullcalendar/3.10.0/fullcalendar.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/fullcalendar/3.10.0/locale/es.js"></script>
+
     <style>
         #calendar {
             max-width: 600px;
             margin: 0 auto;
+
         }
 
         .fc-event-container {
@@ -65,8 +67,6 @@ if ($varsesion == null || $varsesion = '') {
             display: none !important;
         }
 
-
-
         .button:hover {
             background-color: #3e8e41;
         }
@@ -74,8 +74,14 @@ if ($varsesion == null || $varsesion = '') {
         .button:active {
             background-color: #1e522b;
         }
-    </style>
 
+        body {
+  
+            color: #000000;
+            text-align: left;
+            background-color: #fff;
+        }
+    </style>
 </head>
 
 <body id="page-top">
@@ -83,28 +89,22 @@ if ($varsesion == null || $varsesion = '') {
         <div class="modal-dialog" role="document">
             <div class="modal-content">
                 <div class="modal-header bg-dark text-white">
-                    <h3 class="modal-title" id="exampleModalLabel">Agregar nueva cita<?php echo $fila['nombre']; ?>
-                    </h3>
+                    <h3 class="modal-title" id="exampleModalLabel">Agregar nueva cita</h3>
                     <button type="button" class="btn btn-black" data-dismiss="modal">
-                        <i class="fa fa-times" aria-hidden="true"></i></button>
+                        <i class="fa fa-times" aria-hidden="true"></i>
+                    </button>
                 </div>
                 <div class="modal-body">
-
                     <form id="registro" action="../includes/functions.php" method="POST">
-
-
-                        <input type="date" id="fecha" class="form-control" required disabled>
-                        <div class="row" style="
-    margin: 5%  30% 5%;
-">
+                        <input type="date" id="fecha" class="form-control" disabled>
+                        <div class="row" style="margin: 5% 30% 5%;">
                             <div class="col-sm-12">
-                                <a href="#calendarModal" class="button" rel="modal:open">Seleccionar fecha de mi cita</a>
+                                <a href="#calendarModal" class="btn btn-primary" rel="modal:open">Seleccionar fecha de mi cita</a>
                             </div>
                         </div>
                         <div id="calendarModal" class="modal">
                             <div id="calendar"></div>
                         </div>
-
                         <div class="form-group">
                             <label for="hour-select">Selecciona un horario:</label>
                             <select class="form-control" id="hour-select" onchange="assignInputValue()">
@@ -129,79 +129,46 @@ if ($varsesion == null || $varsesion = '') {
                                 <option value="16:40:00">16:40 PM</option>
                             </select>
                         </div>
-
                         <div id="clock" class="container text-center"></div>
-
-
-                        <div class="form-group ">
+                        <div class="form-group">
                             <label>Paciente</label>
                             <select class="form-control" id="id_paciente" name="id_paciente">
                                 <option value="">--Selecciona una opción--</option>
                                 <?php
-
                                 include("../includes/db.php");
-                                //Codigo para mostrar categorias desde otra tabla
                                 $correo = $_SESSION['correo'];
-                                $sql = "SELECT * FROM pacientes ";
+                                $sql = "SELECT * FROM pacientes";
                                 $resultado = mysqli_query($conexion, $sql);
                                 while ($consulta = mysqli_fetch_array($resultado)) {
                                     echo '<option value="' . $consulta['id'] . '">' . $consulta['nombre'] . '</option>';
                                 }
-
                                 ?>
-
-
                             </select>
                         </div>
-
-                        <div class="form-group ">
+                        <div class="form-group">
                             <label>Doctor</label>
                             <select class="form-control" id="id_doctor" name="id_doctor">
                                 <option value="">--Selecciona una opción--</option>
                                 <?php
-
-                                include("../includes/db.php");
-                                //Codigo para mostrar categorias desde otra tabla
-                                $sql = "SELECT * FROM doctor ";
+                                $sql = "SELECT * FROM doctor";
                                 $resultado = mysqli_query($conexion, $sql);
                                 while ($consulta = mysqli_fetch_array($resultado)) {
                                     echo '<option value="' . $consulta['id'] . '">' . $consulta['name'] . '</option>';
                                 }
                                 ?>
-
                             </select>
                         </div>
-
-
-
-                        <!-- 
-                    <div class="form-group">
-                        <input type="hidden" name="estado" id="estado" value="2" class="form-control">
-                    </div>
-
-                    <input type="hidden" name="accion" value="insertar_cita2">
-
-                    <br> -->
-                        <br>
-
-
-
                         <div class="mb-3">
-
                             <button type="submit" id="register" class="btn btn-success" name="registrar">Finalizar</button>
-                            <a href="../index.php" class="btn btn-danger">Continuar mas tarde...</a>
-
+                            <a href="../index.php" class="btn btn-danger">Continuar más tarde...</a>
                         </div>
+                    </form>
                 </div>
             </div>
-
-            </form>
         </div>
     </div>
 
-
+    <script src="../js/agendar.js"></script>
 </body>
 
 </html>
-</body>
-<script src="../js/agendar.js">
