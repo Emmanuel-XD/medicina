@@ -35,21 +35,7 @@
     display: none !important;
   }
 
-  .button {
-    width: 100%;
-    display: inline-block;
-    padding: 8px 16px;
-    font-size: 16px;
-    font-weight: bold;
-    text-align: center;
-    text-decoration: none;
-    color: #fff;
-    background-color: #4CAF50;
-    border: none;
-    border-radius: 4px;
-    cursor: pointer;
 
-  }
 
   .button:hover {
     background-color: #3e8e41;
@@ -66,7 +52,7 @@
 
   /* Estilos para el contenedor principal */
   .container {
-    margin-top: 50px;
+    margin-top: 30px;
     font-family: Arial, sans-serif;
   }
 
@@ -107,7 +93,7 @@
   /* Estilos para el campo de fecha */
   #fecha {
     margin-top: 20px;
-    margin-bottom: 20px;
+
     width: 100%;
     padding: 10px;
     border-radius: 5px;
@@ -144,10 +130,6 @@
   }
 
   /* Estilos para el campo de hora */
-  .form-group label {
-    display: block;
-    margin-bottom: 10px;
-  }
 
 
   /* Estilos para los botones del formulario */

@@ -23,7 +23,6 @@ session_start();
 </head>
 
 <body>
-
   <form id="registro" action="../includes/functions.php" method="POST">
     <div class="container">
       <div class="row justify-content-center align-items-center">
@@ -48,9 +47,32 @@ session_start();
           </div>
 
           <div class="form-group">
-            <label for="hora" class="form-label">Hora*</label>
-            <input type="time" id="hora" name="hora" min="07:00" max="17:00" class="form-control" required>
+            <label for="hour-select">Selecciona un horario:</label>
+            <select class="form-control" id="hour-select" onchange="assignInputValue()">
+              <option value="">--Selecciona una opción--</option>
+              <option value="07:00:00">7:00 AM</option>
+              <option value="07:30:00">7:30 AM</option>
+              <option value="08:00:00">8:00 AM</option>
+              <option value="09:00:00">9:00 AM</option>
+              <option value="09:30:00">9:30 AM</option>
+              <option value="10:00:00">10:00 AM</option>
+              <option value="10:30:00">10:30 AM</option>
+              <option value="11:00:00">11:00 AM</option>
+              <option value="11:20:00">11:20 AM</option>
+              <option value="11:40:00">11:40 AM</option>
+              <option value="12:00:00">12:00 PM</option>
+              <option value="12:20:00">12:20 PM</option>
+              <option value="12:40:00">12:40 PM</option>
+              <option value="13:20:00">13:20 PM</option>
+              <option value="13:40:00">13:40 PM</option>
+              <option value="16:00:00">16:00 PM</option>
+              <option value="16:20:00">16:20 PM</option>
+              <option value="16:40:00">16:40 PM</option>
+            </select>
           </div>
+
+          <div id="clock" class="container text-center"></div>
+
 
           <div class="form-group ">
             <label>Paciente</label>
@@ -76,7 +98,7 @@ session_start();
           <div class="form-group ">
             <label>Doctor</label>
             <select class="form-control" id="id_doctor" name="id_doctor">
-              <option value="">--Selecciona una opcion--</option>
+              <option value="">--Selecciona una opción--</option>
               <?php
 
               include("../includes/db.php");
@@ -91,6 +113,17 @@ session_start();
             </select>
           </div>
 
+
+
+          <!-- 
+                    <div class="form-group">
+                        <input type="hidden" name="estado" id="estado" value="2" class="form-control">
+                    </div>
+
+                    <input type="hidden" name="accion" value="insertar_cita2">
+
+                    <br> -->
+          <br>
 
           <div class="mb-3">
 
@@ -109,167 +142,10 @@ session_start();
 </body>
 
 </html>
-
-<script>
-  var fechatxt
-  $(document).ready(function() {
-
-    function checkdates() {
-
-      var accion = "citas";
-      var datos = new FormData();
-      datos.append("accion", accion)
-      fetch('../includes/functions.php', {
-          method: 'POST',
-          body: datos
-        }).then(response => response.json())
-        .then(response => {
-          if (response === 'no_Dates') {
-
-          } else {
-            var eventvalidator = []
-            response.map(function(i) {
+</body>
+<script src="../js/agendar.js">
 
 
-              eventvalidator.push({
-                title: "FULL",
-                start: `${i['date']}`,
-                end: `${i['date']}`
-              })
-
-
-            })
-          }
-          $('#calendar').fullCalendar({
-            locale: 'es',
-            header: {
-              left: '',
-              center: 'title',
-              right: ''
-            },
-
-            defaultView: 'month',
-            //Aqui  se pone la respuesta que genere el array 
-            events: eventvalidator,
-
-            dayRender: function(date, cell) {
-
-              if (date.day() === 0 || date.day() === 3) { // if day is Friday
-                // apply disabled styles
-                cell.addClass('disabled');
-                cell.css('pointer-events', 'none');
-              }
-              // Get all events for the current day
-              var events = $('#calendar').fullCalendar('clientEvents', function(event) {
-                return moment(event.start).format('YYYY-MM-DD') === moment(date).format('YYYY-MM-DD');
-              });
-              ///
-              if (date < moment().startOf('day')) {
-                cell.addClass('disabled');
-              }
-              if (date >= moment().startOf('day')) {
-                var events = $('#calendar').fullCalendar('clientEvents', function(event) {
-                  return moment(event.start).isSame(date, 'day');
-                });
-                if (events.length >= 1) {
-
-                  cell.addClass('disabled');
-                  cell.html('<div class=""></div>');
-                }
-              }
-            },
-            dayClick: function(date, jsEvent, view) {
-              // Check if the cell has the "disabled" class
-              if ($(this).hasClass('disabled')) {
-                // Do nothing if the cell is disabled
-                alert('No puedes tomar cita este dia');
-              } else {
-                // Show an alert if the cell is clickable
-                fechatxt = moment(date).format(`YYYY-MM-DD`)
-                $("#fecha").val(fechatxt);
-                $("#fecha").removeClass('is-invalid');
-                $("#calendarModal").modal('hide.bs.modal')
-                $("#calendarModal").hide('')
-                $('.jquery-modal').hide();
-              }
-
-            }
-          });
-        })
-
-    }
-
-
-
-
-    checkdates();
-
-    $('#calendarModal').on('shown.bs.modal', function() {
-      $('#calendar').fullCalendar();
-      closeClass: 'close-modal'
-    });
-
-
-
-
-  });
-  $("#register").click(function(e) {
-    e.preventDefault();
-    var form = $('#registro')[0]; // Get the form element
-    var inputs = $('input, select', form); // Get all input and select elements within the form
-    var valid = true;
-
-    // Check if all inputs and selects have a value
-    inputs.each(function() {
-      if (!$(this).val()) {
-        valid = false;
-        $(this).addClass('is-invalid');
-      } else {
-        $(this).removeClass('is-invalid');
-      }
-    });
-
-    if (valid) {
-      var datos = new FormData();
-      datos.append('accion', 'insertar_cita2')
-      datos.append('fecha', fechatxt)
-      datos.append('hora', $("#hora").val())
-      datos.append('id_paciente', $('#id_paciente').val())
-      datos.append('id_doctor', $('#id_doctor').val())
-      datos.append('estado', '2')
-
-      fetch('../includes/functions.php', {
-          method: 'POST',
-          body: datos
-        }).then(response => response.json())
-        .then(response => {
-
-          if (response === "success") {
-            alert('El registro fue guardado correctamente');
-            location.assign('../home/consulta.php');
-
-          }
-          if (response === "error") {
-            alert('Algo salio mal. Intentalo de nuevo');
-            location.assign('../home/agendar.php');
-          }
-
-        })
-
-    }
-  });
-
-
-
-  $('#registro input, select').blur(function() {
-
-    if ($(this).val().length === 0) {
-
-      $(this).addClass('is-invalid');
-    } else {
-      $(this).removeClass('is-invalid');
-    }
-  })
 </script>
 
 </html>
